@@ -16,9 +16,10 @@ nnoremap <leader>fr <cmd>Telescope oldfiles<cr>
 " nnoremap <leader>ft :NERDTreeToggle<cr>
 
 " vim config
-nnoremap <leader>vr :call LoadRelative('init.vim')<cr>
+nnoremap <leader>vr :execute LoadRelative('init.vim')<cr>
 " TODO use g:vim_config_root
 nnoremap <leader>vf :lua require'telescope.builtin'.find_files{cwd = os.getenv('HOME') .. '/.config/nvim/'}<cr>
+nnoremap <leader>vc :CocConfig<cr>
 nnoremap <leader>vs :source %<cr>
 nnoremap <leader>vl :luafile %<cr>
 

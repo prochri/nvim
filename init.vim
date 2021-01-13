@@ -8,9 +8,9 @@ function! LoadRelative(relpath, ...) abort
   let l:abspath = s:vim_config_root . '/' . a:relpath
   let l:filetype = a:0 ? a:1 : a:relpath[-3:]
   if l:filetype ==# 'vim'
-    execute 'source ' . l:abspath
+    return 'source ' . l:abspath
   elseif l:filetype ==# 'lua'
-    execute 'luafile ' . l:abspath
+    return 'luafile ' . l:abspath
   else
     echoerr 'filetype not found: ' . l:filetype
   endif
@@ -19,16 +19,16 @@ endfunction
 
 " let g:vim_config_root = expand('<sfile>:p:h')
 " settings
-call LoadRelative('settings/default.vim')
+execute LoadRelative('settings/default.vim')
 " keybindings
-call LoadRelative('keybindings/default.vim')
-call LoadRelative('keybindings/leader.vim')
-call LoadRelative('keybindings/lsp_completion.vim')
+execute LoadRelative('keybindings/default.vim')
+execute LoadRelative('keybindings/leader.vim')
+execute LoadRelative('keybindings/lsp_completion.vim')
 
 " plugin settings
-call LoadRelative('settings/pre_plugins.vim')
-call LoadRelative('plugins.vim')
-call LoadRelative('settings/post_plugins.vim')
+execute LoadRelative('settings/pre_plugins.vim')
+execute LoadRelative('plugins.vim')
+execute LoadRelative('settings/post_plugins.vim')
 
 
 " personal usages
@@ -36,7 +36,7 @@ if has('nvim')
   lua require'util_functions'
 endif
 
-call LoadRelative('vimscripts/lister.vim')
-call LoadRelative('settings/theme.vim')
-call LoadRelative('autocommands.vim')
+execute LoadRelative('vimscripts/lister.vim')
+execute LoadRelative('settings/theme.vim')
+execute LoadRelative('autocommands.vim')
 

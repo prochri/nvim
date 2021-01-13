@@ -1,16 +1,19 @@
 " lua plugins
 
 if g:use_builtin_lsp
-  call LoadRelative('lua/code/completion.lua')
-  call LoadRelative('lua/code/lsp.lua')
+  execute LoadRelative('lua/code/completion.lua')
+  execute LoadRelative('lua/code/lsp.lua')
+else
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 endif
 
 if has('nvim')
   lua require'bufferline'.setup()
   lua require'colorizer'.setup()
-  call LoadRelative('lua/statusline.lua')
-  call LoadRelative('lua/code/treesitter.lua')
-  call LoadRelative('lua/telescope_extensions.lua')
+  execute LoadRelative('lua/statusline.lua')
+  execute LoadRelative('lua/code/treesitter.lua')
+  execute LoadRelative('lua/telescope_extensions.lua')
 endif
 
-call LoadRelative('settings/projects.vim')
+
+execute LoadRelative('settings/projects.vim')

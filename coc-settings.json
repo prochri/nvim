@@ -1,5 +1,6 @@
 {
   "suggest.noselect": false,
+  "snippets.textmateSnippetsRoots": ["~/.config/Code/User/snippets/"],
   "list.height": 15,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de k",
@@ -29,6 +30,7 @@
     "typeParameter": "\uf728 T",
     "default": "\uf29c  "
   },
+
   "Lua.workspace.library": {"/usr/share/awesome/lib": true},
   "Lua.diagnostics.globals": ["awesome", "client", "screen", "tag", "mouse", "vim"]
 }
