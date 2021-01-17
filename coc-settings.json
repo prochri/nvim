@@ -2,6 +2,7 @@
   "suggest.noselect": false,
   "snippets.textmateSnippetsRoots": ["~/.config/Code/User/snippets/"],
   "list.height": 15,
+  "session.saveOnVimLeave": true,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de k",
     "variable": "\ue79b v",

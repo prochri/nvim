@@ -11,8 +11,7 @@ nnoremap <leader>' <cmd>FloatermToggle getenv('SHELL')<cr>
 nnoremap <leader>ff <cmd>call EasyLister('files')<cr>
 nnoremap <leader>fs <cmd>w<cr>
 nnoremap <leader>fS <cmd>wa<cr>
-" TODO
-nnoremap <leader>fr <cmd>Telescope oldfiles<cr>
+nnoremap <leader>fr <cmd>call EasyLister('oldfiles')<cr>
 " nnoremap <leader>ft :NERDTreeToggle<cr>
 
 " vim config

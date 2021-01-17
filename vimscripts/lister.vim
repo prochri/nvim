@@ -12,7 +12,8 @@ let s:cmd_map = {
   \ "vimcommands": {"coclist": v:true, "telescope": 'commands'},
   \ "keymaps": { "coclist": 'maps', "telescope": v:true},
   \ "helptags": { "coclist": v:true, "telescope": 'help_tags'},
-  \ "projects": ['prosession#ListSessions', 'Prosession'],
+  \ "projects": {"coclist": 'sessions', "telescope": ['prosession#ListSessions', 'Prosession']},
+  \ "oldfiles": {"coclist": ['mylists#oldfiles', 'edit'], "telescope": v:true }
 \ }
 
 let g:used_lister = 'coclist'

@@ -20,6 +20,10 @@ augroup cline
     au WinEnter,InsertLeave,VimEnter,BufEnter * set cursorline
 augroup END
 
+augroup latex
+  au!
+  autocmd FileType tex let b:coc_pairs = [["$", "$"]]
+augroup END
 " augroup latex
 "   au!
 "   au FileType tex setlocal foldmethod=marker

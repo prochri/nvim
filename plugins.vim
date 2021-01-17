@@ -61,12 +61,17 @@ if has('nvim')
 end
 " }}}
 
+
+
 " treesitter syntax highlight {{{
 if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter',
   Plug 'nvim-treesitter/nvim-treesitter-refactor'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nvim-treesitter/completion-treesitter'
+else
+  " general language support
+  Plug 'sheerun/vim-polyglot'
 endif
 " }}}
 
@@ -90,6 +95,7 @@ else
   " coc has its own config file
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug '~/git_repos/coc-generic-list'
+  Plug 'honza/vim-snippets'
 endif
 " }}}
 
