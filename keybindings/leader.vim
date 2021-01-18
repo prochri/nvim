@@ -15,7 +15,7 @@ nnoremap <leader>fr <cmd>call EasyLister('oldfiles')<cr>
 " nnoremap <leader>ft :NERDTreeToggle<cr>
 
 " vim config
-nnoremap <leader>vr :execute LoadRelative('init.vim')<cr>
+nnoremap <silent> <leader>vr :execute LoadRelative('init.vim')<cr>
 " TODO use g:vim_config_root
 nnoremap <leader>vf :lua require'telescope.builtin'.find_files{cwd = os.getenv('HOME') .. '/.config/nvim/'}<cr>
 nnoremap <leader>vc :CocConfig<cr>
@@ -23,9 +23,9 @@ nnoremap <leader>vs :source %<cr>
 nnoremap <leader>vl :luafile %<cr>
 
 " window commands
-nnoremap <leader>wd :hide<cr>
-nnoremap <leader>wv :vsplit<cr>
-nnoremap <leader>ws :split<cr>
+nnoremap <leader>wd <cmd>hide<cr>
+nnoremap <leader>wv <cmd>vsplit<cr>
+nnoremap <leader>ws <cmd>split<cr>
 nnoremap <leader>wh <c-w><c-h>
 nnoremap <leader>wj <c-w><c-j>
 nnoremap <leader>wk <c-w><c-k>

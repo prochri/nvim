@@ -8,6 +8,7 @@ if !g:use_builtin_lsp
     \ [ 'coc-snippets', 'coc-lists', 'coc-pairs', 
     \ 'coc-marketplace', 'coc-prettier', 'coc-floaterm', 
     \ 'coc-vimlsp', 'coc-lua', 'coc-tsserver', 'coc-json', 'coc-explorer',
+    \ 'coc-clangd',
     \ 'coc-texlab', 'coc-bibtex', 'coc-vimtex'
     \]
   let g:coc_snippet_next = '<tab>'
