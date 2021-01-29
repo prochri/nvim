@@ -1,4 +1,5 @@
 
+set pumheight=15
 " only use this bindings for coc.nvim
 if g:use_builtin_lsp
   " TODO load lua code here
@@ -34,7 +35,9 @@ nmap <leader>eN <Plug>(coc-diagnostic-prev)
 nnoremap <leader>el <cmd>CocDiagnostic list<cr>
 
 " code actions TODO
-nnoremap <leader>cr <Plug>call CocActionAsync('rename')<cr>
+nnoremap <leader>cr <cmd>call CocActionAsync('rename')<cr>
+nnoremap <leader>co <cmd>CocList symbols<cr>
+nnoremap <leader>cf <cmd>call CocAction('format')<cr>
 
 " TODO
 " nnoremap K
