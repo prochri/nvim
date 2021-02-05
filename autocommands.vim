@@ -1,17 +1,6 @@
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
-
 " basic settings {{{
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " autocmd BufEnter * lua require'completion'.on_attach() 
-
-
-augroup default_folding
-  au!
-"   au FileType * setlocal foldmethod=expr
-"   au FileType * setlocal foldexpr=nvim_treesitter#foldexpr()
-  au BufRead * set foldexpr=nvim_treesitter#foldexpr()
-augroup END
 
 " Only show cursorline in current window in insert mode
 augroup cline
@@ -40,6 +29,10 @@ augroup fish
   au FileType fish set foldmethod=expr
 augroup END
 
+augroup treesitter_fold
+  au!
+  au BufReadPost,FileReadPost,FileType * :call v:lua.myfun.treesitter_enable_fold()
+augroup END
 
 " hi Normal ctermbg=None
 " end basic settings }}}

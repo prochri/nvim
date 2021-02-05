@@ -38,6 +38,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
+" for auto detecting shifwidth
+Plug 'tpope/vim-sleuth'
 Plug 'easymotion/vim-easymotion'
 Plug 'moll/vim-bbye'
 
@@ -102,6 +104,7 @@ endif
 " specific language support
 Plug 'dag/vim-fish'
 Plug 'lervag/vimtex'
+Plug 'masukomi/vim-markdown-folding'
 
 " other utilities
 " projects

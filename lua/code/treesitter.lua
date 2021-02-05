@@ -1,3 +1,11 @@
+_G.myfun = _G.myfun or {}
+function _G.myfun.treesitter_enable_fold()
+  if pcall(vim.treesitter.get_parser, 0) then
+    vim.cmd('setlocal foldexpr=nvim_treesitter#foldexpr()')
+    vim.cmd('setlocal foldmethod=expr')
+  end
+end
+
 require'nvim-treesitter.configs'.setup {
   highlight = {enable = true},
   folding = {enable = true},

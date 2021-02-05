@@ -1,5 +1,5 @@
 if &shell =~# 'fish$'
-    set shell=zsh
+  set shell=zsh
 endif
 
 syntax on
@@ -23,15 +23,15 @@ set lazyredraw
 set splitbelow
 set splitright
 set scrolloff=3
-" set foldlevelstart=99
+set foldlevelstart=99
 set wrap
-
 " tab and indent behaviour
 set autoindent
 set smartindent
 
 set backspace=indent,eol,start
-set expandtab shiftwidth=2
+set expandtab 
+set shiftwidth=2
 set hidden
 
 " text information characters
