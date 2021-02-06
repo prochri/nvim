@@ -2,6 +2,9 @@
 let g:prosession_on_startup = 0
 let g:prosession_dir = '~/.cache/vim/session/'
 
+" vimtex syntax folding
+let g:vimtex_fold_enabled = 1
+
 " coc.nvim
 if !g:use_builtin_lsp
   let g:coc_global_extensions = 
@@ -21,5 +24,6 @@ endif
 " terminal
 let g:floaterm_autoclose = 1
 let g:floaterm_winblend = 10
-tnoremap <silent><esc> <c-\><c-n>:FloatermHide<cr>
+
+tnoremap <silent><M-esc> <c-\><c-n>:FloatermHide<cr>
 

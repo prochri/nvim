@@ -40,6 +40,8 @@ nnoremap <leader>hk <cmd>call EasyLister('keymaps')<cr>
 nnoremap <leader>sd <cmd>call EasyLister('grep')<cr>
 nnoremap <leader>sp <cmd>call EasyLister('grep')<cr>
 nnoremap <leader>sb <cmd>call EasyLister('lines')<cr>
+" no equivalent for telescope
+nnoremap <leader>sr <cmd>CocListResume<cr> % TODO inherent right word?
 
 
 " project
@@ -47,8 +49,8 @@ nnoremap <leader>pf <cmd>call EasyLister('files')<cr>
 nnoremap <leader>pp <cmd>call EasyLister('projects')<cr>
 
 " git
-nnoremap <leader>gg <cmd>FloatermNew --name=layzgit --autoclose=1 --width=1.0 --height=1.0 lazygit<cr>
-nnoremap <leader>gs <cmd>FloatermNew --name=layzgit --autoclose=1 --width=1.0 --height=1.0 lazygit<cr>
+nnoremap <leader>gg <cmd>FloatermNew --name=magit --autoclose=1 --width=1.0 --height=1.0 magit<cr>
+nnoremap <leader>gs <cmd>FloatermNew --name=magit --autoclose=1 --width=1.0 --height=1.0 magit<cr>
 
 " buffer mappings
 nnoremap <leader>bb <cmd>call EasyLister('buffers')<cr>
