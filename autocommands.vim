@@ -12,6 +12,7 @@ augroup END
 augroup latex
   au!
   autocmd FileType tex let b:coc_pairs = [["$", "$"]]
+  autocmd BufNewFile,BufRead *.tikz set filetype=tex
 augroup END
 " augroup latex
 "   au!

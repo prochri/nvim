@@ -19,6 +19,10 @@ if !g:use_builtin_lsp
   
   set completeopt=menuone,noinsert
   set updatetime=200
+
+  let g:airline#extensions#coc#error_symbol = ' '
+  let g:airline#extensions#coc#warning_symbol = ' '
+  let g:airline#extensions#coc#enabled = 1
 endif
 
 " terminal

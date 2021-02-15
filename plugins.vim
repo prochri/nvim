@@ -51,13 +51,10 @@ end
 
 " theming and colours {{{
 Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
 if has('nvim')
   Plug 'kyazdani42/nvim-web-devicons'
-  " statusline
-  Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
-  " bufferline
-  Plug 'akinsho/nvim-bufferline.lua'
   " highlight colors
   Plug 'norcalli/nvim-colorizer.lua'
 end

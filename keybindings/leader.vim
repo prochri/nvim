@@ -30,6 +30,7 @@ nnoremap <leader>wh <c-w><c-h>
 nnoremap <leader>wj <c-w><c-j>
 nnoremap <leader>wk <c-w><c-k>
 nnoremap <leader>wl <c-w><c-l>
+nnoremap <leader>w= <c-w>=
 
 " help
 " nnoremap <leader>hm <cmd>call <cr> man pages
@@ -43,14 +44,24 @@ nnoremap <leader>sb <cmd>call EasyLister('lines')<cr>
 " no equivalent for telescope
 nnoremap <leader>sr <cmd>CocListResume<cr> % TODO inherent right word?
 
+" toggle
+function! s:toggle_background() abort
+  if &background ==# 'light'
+    set background=dark
+  else
+    set background=light
+  endif
+endfunction
+
+nnoremap <leader>tb <cmd>call <SID>toggle_background()<cr>
 
 " project
 nnoremap <leader>pf <cmd>call EasyLister('files')<cr>
 nnoremap <leader>pp <cmd>call EasyLister('projects')<cr>
 
 " git
-nnoremap <leader>gg <cmd>FloatermNew --name=magit --autoclose=1 --width=1.0 --height=1.0 magit<cr>
-nnoremap <leader>gs <cmd>FloatermNew --name=magit --autoclose=1 --width=1.0 --height=1.0 magit<cr>
+nnoremap <leader>gg <cmd>execute 'FloatermNew --name=magit --autoclose=1 --width=1.0 --height=1.0 magit '.&background<cr>
+nnoremap <leader>gs <cmd>execute 'FloatermNew --name=magit --autoclose=1 --width=1.0 --height=1.0 magit '.&background<cr>
 
 " buffer mappings
 nnoremap <leader>bb <cmd>call EasyLister('buffers')<cr>
