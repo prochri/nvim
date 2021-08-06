@@ -15,8 +15,11 @@ let s:cmd_map = {
   \ "projects": {"coclist": 'sessions', "telescope": ['prosession#ListSessions', 'Prosession']},
   \ "oldfiles": {"coclist": ['mylists#oldfiles', 'edit'], "telescope": v:true }
 \ }
-
-let g:used_lister = 'coclist'
+if g:use_builtin_lsp
+  let g:used_lister = 'telescope'
+else
+  let g:used_lister = 'coclist'
+end
 
 function! s:executeSimple(...) abort
   let l:cmd = a:1

@@ -1,4 +1,4 @@
-let g:use_builtin_lsp = 0
+let g:use_builtin_lsp = 1
 let g:use_builtin_lsp = has('nvim') ? g:use_builtin_lsp : 0
 
 let s:vim_config_root = expand('<sfile>:p:h')

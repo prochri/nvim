@@ -1,4 +1,5 @@
 local telescope_builtin = require 'telescope.builtin'
+require'telescope'.load_extension('project')
 local pickers = require 'telescope.pickers'
 local finders = require 'telescope.finders'
 local sorters = require 'telescope.sorters'
@@ -22,7 +23,7 @@ function telescope_builtin.generic(cmd, opts)
     finder = finders.new_table(itemLister()),
     sorter = sorters.get_generic_fuzzy_sorter(),
     attach_mappings = function(prompt_bufnr)
-      actions.goto_file_selection_edit:replace(
+      actions.select_default:replace(
         function ()
           local item = actions.get_selected_entry(prompt_bufnr)
           actions.close(prompt_bufnr)
@@ -41,7 +42,7 @@ function telescope_builtin.projects(opts)
     finder = finders.new_table(session_lister()),
     sorter = sorters.get_generic_fuzzy_sorter(),
     attach_mappings = function(prompt_bufnr)
-      actions.goto_file_selection_edit:replace(
+      actions.select_default:replace(
         function()
           local selection = actions.get_selected_entry(prompt_bufnr)
           actions.close(prompt_bufnr)

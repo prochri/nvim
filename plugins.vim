@@ -40,6 +40,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 " for auto detecting shifwidth
 Plug 'tpope/vim-sleuth'
+" TODO replace
 Plug 'easymotion/vim-easymotion'
 Plug 'moll/vim-bbye'
 
@@ -80,14 +81,15 @@ if g:use_builtin_lsp
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
   " completion
-  Plug 'steelsojka/completion-buffers'
-  Plug 'nvim-lua/completion-nvim'
+  Plug 'hrsh7th/nvim-compe'
 
   " lsp and formatting
   Plug 'lukas-reineke/format.nvim'
-  Plug 'tjdevries/nlua.nvim'
+  " Plug 'tjdevries/nlua.nvim'
   Plug 'rafcamlet/nvim-luapad'
   Plug 'neovim/nvim-lspconfig'
+  Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'glepnir/lspsaga.nvim'
 
   " lsp
 else
@@ -109,9 +111,15 @@ Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 " terminal
 Plug 'voldikss/vim-floaterm'
+
+" vim trainers/games 
+Plug 'ThePrimeagen/vim-be-good'
+Plug 'takac/vim-hardtime'
+
 " searcher
 if has('nvim')
   Plug 'nvim-lua/telescope.nvim'
+  Plug 'nvim-telescope/telescope-project.nvim'
 endif
 
 call plug#end()

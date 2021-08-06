@@ -29,5 +29,10 @@ endif
 let g:floaterm_autoclose = 1
 let g:floaterm_winblend = 10
 
+" hardtime
+let g:hardtime_maxcount = 2
+let g:hardtime_ignore_quickfix = 1
+let g:hardtime_default_on = 0
+
 tnoremap <silent><M-esc> <c-\><c-n>:FloatermHide<cr>
 
