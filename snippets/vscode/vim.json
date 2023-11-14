@@ -1,0 +1,7 @@
+{
+  "autogroup": {
+    "prefix": "au",
+    "body": ["augroup $1","au!","au $2", "augroup END"],
+    "description": "autogroup"
+  }
+}

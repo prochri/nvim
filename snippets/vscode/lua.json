@@ -1,0 +1,7 @@
+{
+  "testblock": {
+    "prefix": "testingdo",
+    "body": "do $1 end$0",
+    "description": "testblock"
+  }
+}

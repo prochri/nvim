@@ -1,0 +1,19 @@
+{
+  "name": "Vscode snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "latex",
+          "tex",
+          "plaintex"
+        ],
+        "path": "./vscode/latex.json"
+      },
+      {
+        "language": "lua",
+        "path": "./vscode/lua.json"
+      }
+    ]
+  }
+}

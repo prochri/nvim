@@ -1,0 +1,27 @@
+{
+	"Bold text": {
+		"prefix": ["bf", "\\bf"],
+		"body": "\\textbf{$1}$0",
+		"description": "create a bold text environment"
+	},
+	"Typewriter text": {
+		"prefix": ["tt", "\\tt"],
+		"body": "\\texttt{$1}$0",
+		"description": "create a typewriter text environment"
+	},
+	"Emphasize text": {
+		"prefix": ["em", "\\em"],
+		"body": "\\emph{$1}$0",
+		"description": "create a emphasize text environment"
+	},
+	"rightarrow": {
+		"prefix": ["ra", "\\ra", "$ra", "$\\ra"],
+		"body": "\\rightarrow$0",
+		"description": "in text right arrow"
+	},
+	"fraction": {
+		"prefix": ["frac", "\\frac"],
+		"body": "\\frac{$1}{$2}$0",
+		"description": "fraction in math"
+	}
+}
