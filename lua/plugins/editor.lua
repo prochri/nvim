@@ -92,7 +92,24 @@ return {
   { "ggandor/flit.nvim", enabled = false },
   { "akinsho/bufferline.nvim", enabled = true },
   { "ojroques/nvim-bufdel" },
-  -- { "luukvbaal/statuscol.nvim", opts = { setopt = true } },
+  {
+    "luukvbaal/statuscol.nvim",
+    opts = function(spec, opts)
+      -- NOTE: not an override, but I need to require manually here
+      local builtin = require("statuscol.builtin")
+      return {
+        segments = {
+          { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+          { text = { "%s" }, click = "v:lua.ScSa" },
+          {
+            text = { builtin.lnumfunc, " " },
+            condition = { true, builtin.not_empty },
+            click = "v:lua.ScLa",
+          },
+        },
+      }
+    end,
+  },
 
   -- tasks
   {
@@ -141,6 +158,9 @@ return {
           unique = true,
         },
       },
+      buf_filter = function(bufnr)
+        return xonuto.project_buffer_filter(bufnr)
+      end,
     },
   },
   {
@@ -184,6 +204,9 @@ return {
         dependencies = {
           "kkharji/sqlite.lua",
         },
+      },
+      {
+        "jonarrien/telescope-cmdline.nvim",
       },
     },
     opts = function(spec, opts)
@@ -310,6 +333,13 @@ return {
     },
   },
   {
+    "lewis6991/gitsigns.nvim",
+    opts = function(spec, opts)
+      opts.current_line_blame = true
+      return opts
+    end,
+  },
+  {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     enabled = false,
     config = function()
@@ -390,6 +420,7 @@ return {
       end)
     end,
   },
+  {},
   {
     "edluffy/hologram.nvim",
     config = function()
@@ -397,5 +428,8 @@ return {
       --   auto_display = true,
       -- })
     end,
+  },
+  {
+    "tpope/vim-rsi",
   },
 }

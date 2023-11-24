@@ -59,7 +59,6 @@ return {
       opts.pickers.commands = {
         theme = "ivy",
       }
-      p(opts.previewers)
       -- opts.pickers.lsp_definitions = {
       --   theme = "cursor",
       -- }
@@ -137,7 +136,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-emoji" },
+    dependencies = { "hrsh7th/cmp-emoji", { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } } },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
@@ -145,7 +144,8 @@ return {
       opts.experimental = {
         ghost_text = false,
       }
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
+      -- opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" }, { name = "git" } }))
+      opts.sources = vim.list_extend(opts.sources, { { name = "emoji" }, { name = "git" } })
       opts.mapping["<C-j>"] =
         cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" })
       opts.mapping["<C-k>"] =
@@ -184,6 +184,11 @@ return {
         end
       end)
       opts.mapping["<CR>"] = nil
+    end,
+    init = function(_)
+      require("cmp_git").setup({
+        filetypes = { "NeogitCommitMessage", "*" },
+      })
     end,
   },
 }

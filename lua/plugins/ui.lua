@@ -25,4 +25,8 @@ return {
       return old_opts
     end,
   },
+  {
+    "soulis-1256/hoverhints.nvim",
+    opts = true,
+  },
 }

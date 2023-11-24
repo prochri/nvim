@@ -3,8 +3,8 @@ local map = vim.keymap.set
 if not _G.xonuto then _G.xonuto = {} end
 _G.xonuto.wk_map = {mode = {"n", "v"}}
     
-map("n", "<leader> ", "<cmd>Telescope commands<cr>", {noremap = true, silent = true, desc = "+Commands"})
-map("v", "<leader> ", "<cmd>Telescope commands<cr>", {noremap = true, silent = true, desc = "+Commands"})
+map("n", "<leader> ", "<cmd>Telescope cmdline<cr>", {noremap = true, silent = true, desc = "+Commands"})
+map("v", "<leader> ", "<cmd>Telescope cmdline<cr>", {noremap = true, silent = true, desc = "+Commands"})
 map("n", "<leader>'", "<cmd>ToggleTerm<cr>", {noremap = true, silent = true, desc = "ToggleTerm"})
 map("v", "<leader>'", "<cmd>ToggleTerm<cr>", {noremap = true, silent = true, desc = "ToggleTerm"})
 map("n", "<leader>sP", "<cmd>Telescope grep_string<cr>", {noremap = true, silent = true, desc = "Search cursor word"})
@@ -99,6 +99,8 @@ map("n", "<leader>tn", "<cmd>tabn<cr>", {noremap = true, silent = true, desc = "
 map("v", "<leader>tn", "<cmd>tabn<cr>", {noremap = true, silent = true, desc = "next tab"})
 map("n", "<leader>tp", "<cmd>tabp<cr>", {noremap = true, silent = true, desc = "next tab"})
 map("v", "<leader>tp", "<cmd>tabp<cr>", {noremap = true, silent = true, desc = "next tab"})
+map("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<cr>", {noremap = true, silent = true, desc = "Toggle Git Blame"})
+map("v", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<cr>", {noremap = true, silent = true, desc = "Toggle Git Blame"})
 map("n", "<leader>d.", "<cmd>lua xonuto.hydra.debug:activate()<cr>", {noremap = true, silent = true, desc = "debug hydra"})
 map("v", "<leader>d.", "<cmd>lua xonuto.hydra.debug:activate()<cr>", {noremap = true, silent = true, desc = "debug hydra"})
 map("n", "<leader>dd", "<cmd>lua require'dap'.continue()<cr>", {noremap = true, silent = true, desc = "start debugging"})

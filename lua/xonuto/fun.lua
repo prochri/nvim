@@ -502,3 +502,36 @@ function xonuto.dap_info()
   dap.sessions()
   require("dap.ext.vscode")
 end
+
+-- returns true if the buffer should stay in the list
+-- false if the buffer should not be loaded next time
+function xonuto.project_buffer_filter(bufnr)
+  local resession_filter = require("resession").default_buf_filter
+  if not resession_filter(bufnr) then
+    return false
+  end
+
+  local path = vim.api.nvim_buf_get_name(bufnr)
+  if not path then
+    return false
+  end
+
+  -- get file path of bufnr
+  if path:match(".rustup") then
+    return false
+  end
+  if path:match(".cargo") then
+    return false
+  end
+  -- filter out files containing "node_modules"
+  if path:match("node_modules") then
+    return false
+  end
+  -- filter out files not in the current pwd
+  if not path:match(vim.fn.getcwd()) then
+    return false
+  end
+
+  -- otherwise, keep the buffer
+  return true
+end

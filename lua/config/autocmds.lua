@@ -31,15 +31,10 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 local function on_dir_change(event)
-  -- pcall require neogit
-  local ok, neogit = pcall(require, "neogit")
-  if ok then
-    print("reset git")
-    neogit.dispatch_reset()
-  end
-  -- reinit
-  p(event)
-  print("changed dir!!!")
+  -- local ok, neogit = pcall(require, "neogit")
+  -- if ok then
+  --   neogit.dispatch_reset()
+  -- end
 end
 
 vim.api.nvim_create_augroup("detect_dir_change", {})
@@ -98,6 +93,46 @@ if ok then
     resession.load(opts.args)
   end, {})
 end
+
+local get_managed_clients = function(arg)
+  local lspconfig = require("lspconfig")
+  local clients = {}
+  for _, client in ipairs(lspconfig.util.get_managed_clients()) do
+    if clients[client.name] == nil then
+      clients[client.name] = {
+        ids = { client.id },
+        name = client.name,
+      }
+    else
+      table.insert(clients[client.name].ids, client.id)
+    end
+  end
+  clients = vim.tbl_map(function(client)
+    return client.name
+    -- return ("%s (%s)"):format(client.name, table.concat(client.ids, ", "))
+  end, clients)
+  table.sort(clients)
+  return vim.tbl_filter(function(s)
+    return s:sub(1, #arg) == arg
+  end, clients)
+end
+vim.api.nvim_create_user_command("LspRestartName", function(opts)
+  local lspconfig = require("lspconfig")
+  local args = vim.split(opts.args, " ")
+  if #args == 0 then
+    return
+  end
+  local clients = lspconfig.util.get_managed_clients()
+  for _, client in ipairs(clients) do
+    if client.name == args[1] then
+      vim.cmd("LspRestart " .. client.id)
+    end
+  end
+end, {
+  complete = get_managed_clients,
+  nargs = "?",
+  desc = "Manually restart all clients with the given name",
+})
 
 local ok, osv = pcall(require, "osv")
 if ok then
