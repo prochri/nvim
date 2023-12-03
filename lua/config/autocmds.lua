@@ -30,6 +30,68 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = keybind_build,
 })
 
+local ft_disable_kb = {
+  default = {
+    [100] = {
+      "lsp_semantic_highlight",
+    },
+    [1000] = {
+      -- "ts_highlight",
+      "auto_format",
+    },
+  },
+}
+
+local disable_feature = {
+  lsp_semantic_highlight = function(buf)
+    for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = buf })) do
+      vim.lsp.semantic_tokens.stop(buf, client.id)
+    end
+  end,
+  ts_highlight = function(buf)
+    local ts_config = require("nvim-treesitter.configs")
+    for _, module in ipairs(ts_config.get_modules()) do
+      vim.cmd("TSBufDisable " .. module)
+    end
+  end,
+  auto_format = function(buf)
+    local LazyUtils = require("lazyvim.util")
+    if LazyUtils.format.enabled(buf) then
+      LazyUtils.format.toggle(true)
+    end
+  end,
+}
+
+local function check_bigfile(event)
+  local buf = event.buf
+  local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+  if not ok or not stats then
+    return
+  end
+
+  local rules = ft_disable_kb.default
+  local filetype = vim.bo[buf].ft
+  if ft_disable_kb[filetype] then
+    rules = ft_disable_kb[filetype]
+  end
+  for max_filesize, value in pairs(rules) do
+    if stats.size > max_filesize * 1024 then
+      for _, feature in ipairs(value) do
+        if disable_feature[feature] then
+          disable_feature[feature](buf)
+        end
+      end
+    end
+  end
+end
+vim.api.nvim_create_augroup("large_file_size", {})
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = "large_file_size",
+  pattern = "*",
+  -- enable wrap mode for json files only
+  callback = check_bigfile,
+})
+
 local function on_dir_change(event)
   -- local ok, neogit = pcall(require, "neogit")
   -- if ok then
@@ -116,7 +178,7 @@ local get_managed_clients = function(arg)
     return s:sub(1, #arg) == arg
   end, clients)
 end
-vim.api.nvim_create_user_command("LspRestartName", function(opts)
+vim.api.nvim_create_user_command("LspNameRestart", function(opts)
   local lspconfig = require("lspconfig")
   local args = vim.split(opts.args, " ")
   if #args == 0 then

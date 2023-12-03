@@ -164,6 +164,15 @@ return {
     },
   },
   {
+    "LunarVim/bigfile.nvim",
+    opts = {
+      features = {
+        "treesitter",
+        "syntax",
+      },
+    },
+  },
+  {
     "stevearc/aerial.nvim",
     opts = true,
   },
