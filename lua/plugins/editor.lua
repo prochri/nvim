@@ -65,6 +65,27 @@ return {
       { "<M-l>", function() require("sibling-swap").swap_with_right() end, mode = { "n", "v" }, },
     },
   },
+  {
+    "mg979/vim-visual-multi",
+    branch = "master",
+  },
+  {
+    "smoka7/multicursors.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "smoka7/hydra.nvim",
+    },
+    opts = {},
+    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+    keys = {
+      {
+        mode = { "v", "n" },
+        "<Leader>m",
+        "<cmd>MCstart<cr>",
+        desc = "Create a selection for selected text or word under the cursor",
+      },
+    },
+  },
   -- {,
   --   "Bekaboo/dropbar.nvim",
   --   opts = {
@@ -220,6 +241,7 @@ return {
     },
     opts = function(spec, opts)
       opts.defaults.dynamic_preview_title = true
+      opts.defaults.mappings.i["<D-v>"] = '<C-r>"'
       return opts
     end,
     keys = function(_, keys)

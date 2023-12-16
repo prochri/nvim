@@ -1,4 +1,3 @@
-local tmp = require("lazyvim.plugins.extras.lang.typescript")
 return {
   -- add prisma to treesitter
   {
@@ -13,10 +12,9 @@ return {
   -- setup lspconfig
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        prismals = {},
-      },
-    },
+    opts = function(_, opts)
+      -- opts.servers.prismals = {}
+      return opts
+    end,
   },
 }

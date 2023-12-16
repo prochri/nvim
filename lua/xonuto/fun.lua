@@ -152,11 +152,12 @@ function xonuto.open_pdf()
   end
 end
 
-local notes_path = vim.env.HOME .. "/Nextcloud/Notes/"
-local daily_notes = notes_path .. "DailyNotes/"
+local notes_path = vim.env.HOME .. "/Notes"
+local daily_notes = notes_path .. "/DeeklyNotes/DailyNotes/"
 xonuto.open_todays_note = function()
   local date = vim.fn.strftime("%Y-%m-%d")
   local file = daily_notes .. date .. ".md"
+  print(file)
   vim.cmd.edit(file)
 end
 
