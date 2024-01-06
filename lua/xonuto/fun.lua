@@ -536,3 +536,61 @@ function xonuto.project_buffer_filter(bufnr)
   -- otherwise, keep the buffer
   return true
 end
+
+local phist_state = nil
+local in_telescope_history = false
+local telescope_phist = "telescope-phist"
+vim.api.nvim_create_augroup(telescope_phist, {})
+vim.api.nvim_create_autocmd("WinLeave", {
+  group = telescope_phist,
+  callback = function()
+    if vim.bo.filetype ~= "TelescopePrompt" then
+      return
+    end
+    if not in_telescope_history then
+      phist_state = nil
+    end
+    in_telescope_history = false
+  end,
+})
+
+function xonuto.picker_history(prev)
+  local state = require("telescope.state")
+  local builtin_pickers = require("telescope.builtin")
+  local function resume_picker(i)
+    in_telescope_history = true
+    builtin_pickers.resume({ cache_index = i })
+  end
+
+  local cached_pickers = state.get_global_key("cached_pickers")
+  if not cached_pickers then
+    vim.notify("There is no picker history", vim.log.levels.WARN)
+    return
+  end
+  local cached_picker_copy = {}
+  for k, v in pairs(cached_pickers) do
+    cached_picker_copy[k] = v
+  end
+  if not phist_state then
+    if prev then
+      phist_state = {
+        current_index = 2,
+      }
+      resume_picker(1)
+    end
+    return
+  end
+
+  local i = phist_state.current_index + (prev and 1 or -1)
+  if i < 1 or i > #cached_pickers then
+    if prev then
+      vim.notify("No previous picker in history at index " .. i, vim.log.levels.WARN)
+    else
+      vim.notify("No next picker in history at index " .. i, vim.log.levels.WARN)
+    end
+    return
+  end
+  phist_state.current_index = i
+  resume_picker(i)
+  state.set_global_key("cached_pickers", cached_picker_copy)
+end

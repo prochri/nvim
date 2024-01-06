@@ -71,6 +71,8 @@ map("v", "<leader>pr", "<cmd>OverseerRun<cr>", {noremap = true, silent = true, d
 _G.xonuto.wk_map["<leader>pt"] = { name = "+Task Tools" }
 map("n", "<leader>ptt", "<cmd>OverseerToggle<cr>", {noremap = true, silent = true, desc = "Toggle Task Window"})
 map("v", "<leader>ptt", "<cmd>OverseerToggle<cr>", {noremap = true, silent = true, desc = "Toggle Task Window"})
+map("n", "<leader>ptl", "<cmd>OverseerTaskAction<cr>", {noremap = true, silent = true, desc = "Last Task Actions"})
+map("v", "<leader>ptl", "<cmd>OverseerTaskAction<cr>", {noremap = true, silent = true, desc = "Last Task Actions"})
 _G.xonuto.wk_map["<leader>o"] = { name = "+Organizational/Obsidian" }
 map("n", "<leader>os", "<cmd>ZkNotes<cr>", {noremap = true, silent = true, desc = "Search notes"})
 map("v", "<leader>os", "<cmd>ZkNotes<cr>", {noremap = true, silent = true, desc = "Search notes"})

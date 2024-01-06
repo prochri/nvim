@@ -202,3 +202,10 @@ if ok then
     osv.launch({ port = 8086 })
   end, {})
 end
+-- cmdline helper: use
+-- nvim --cmd 'let g:debugee=v:true'
+-- To launch nvim with the debugee server immdeiately
+if vim.g.debugee then
+  print("launching debugee")
+  osv.launch({ port = 8086 })
+end

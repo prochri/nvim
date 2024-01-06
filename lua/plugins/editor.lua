@@ -17,7 +17,7 @@ return {
           { "z",     mode = { "o", "x" }, function() require("flash").jump() end,              desc = "Flash" },
           { "S",     mode = { "n" },      function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
           { "Z",     mode = { "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-          { "r",     mode = "o",          function() require("flash").remote() end,            desc = "Remote Flash" },
+          { "r",     mode = { "o" },      function() require("flash").remote() end,            desc = "Remote Flash" },
           { "R",     mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
           { "<c-s>", mode = { "c" },      function() require("flash").toggle() end,            desc =
           "Toggle Flash Search" },
@@ -240,8 +240,7 @@ return {
       },
     },
     opts = function(spec, opts)
-      opts.defaults.dynamic_preview_title = true
-      opts.defaults.mappings.i["<D-v>"] = '<C-r>"'
+      -- NOTE: the setting stuff happens in override.nvim
       return opts
     end,
     keys = function(_, keys)

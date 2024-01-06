@@ -53,6 +53,9 @@ return {
     opts = function(_, opts)
       local _, actions = pcall(require, "telescope.actions")
       opts.defaults.path_display = { "truncate" }
+      opts.defaults.dynamic_preview_title = true
+      opts.defaults.cache_picker = opts.defaults.cache_picker or {}
+      opts.defaults.cache_picker.num_pickers = 100
       opts.pickers = {}
       opts.pickers.find_files = {}
       opts.pickers.find_files.hidden = false
@@ -95,6 +98,13 @@ return {
       if ok then
         opts.defaults.mappings.i["<C-t>"] = trouble.open_with_trouble
         opts.defaults.mappings.n["<C-t>"] = trouble.open_with_trouble
+      end
+      opts.defaults.mappings.i["<D-v>"] = { "<C-r>+", type = "command" }
+      opts.defaults.mappings.i["<C-,>"] = function(prompt_bufnr)
+        xonuto.picker_history(true)
+      end
+      opts.defaults.mappings.i["<C-.>"] = function(prompt_bufnr)
+        xonuto.picker_history(false)
       end
       opts.extensions = {
         fzf = {
