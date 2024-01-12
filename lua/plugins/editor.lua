@@ -261,6 +261,11 @@ return {
     end,
   },
   {
+    dir = "~/git/telescope-picker-history-action",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    opts = true,
+  },
+  {
     dir = "~/git/telescope-all-recent.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "kkharji/sqlite.lua", "stevearc/dressing.nvim" },
     opts = {

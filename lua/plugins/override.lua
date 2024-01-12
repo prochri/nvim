@@ -100,12 +100,9 @@ return {
         opts.defaults.mappings.n["<C-t>"] = trouble.open_with_trouble
       end
       opts.defaults.mappings.i["<D-v>"] = { "<C-r>+", type = "command" }
-      opts.defaults.mappings.i["<C-,>"] = function(prompt_bufnr)
-        xonuto.picker_history(true)
-      end
-      opts.defaults.mappings.i["<C-.>"] = function(prompt_bufnr)
-        xonuto.picker_history(false)
-      end
+      local history = require("telescope-picker-history-action")
+      opts.defaults.mappings.i["<C-,>"] = history.prev_picker
+      opts.defaults.mappings.i["<C-.>"] = history.next_picker
       opts.extensions = {
         fzf = {
           fuzzy = true,
