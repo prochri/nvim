@@ -190,6 +190,8 @@ return {
           luasnip.jump(1)
         end
       end)
+      opts.mapping["<C-d>"] = cmp.mapping.scroll_docs(4)
+      opts.mapping["<C-u>"] = cmp.mapping.scroll_docs(-4)
       opts.mapping["<CR>"] = nil
     end,
     init = function(_)

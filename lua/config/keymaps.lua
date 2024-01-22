@@ -38,11 +38,14 @@ local terminal_escape = "<C-\\><C-n>"
 tnoremap("<C-Esc>", terminal_escape)
 tnoremap("<M-Esc>", terminal_escape)
 tnoremap("<M-Space>", terminal_escape .. "<Space>")
-tnoremap("<C-h>", terminal_escape .. "<C-w>h")
-tnoremap("<C-j>", terminal_escape .. "<C-w>j")
-tnoremap("<C-k>", terminal_escape .. "<C-w>k")
-tnoremap("<C-l>", terminal_escape .. "<C-w>l")
+-- should be part of lazyvim
+-- tnoremap("<C-h>", terminal_escape .. "<C-w>h")
+-- tnoremap("<C-j>", terminal_escape .. "<C-w>j")
+-- tnoremap("<C-k>", terminal_escape .. "<C-w>k")
+-- tnoremap("<C-l>", terminal_escape .. "<C-w>l")
 tnoremap("<S-BS>", "<BS>")
+vim.cmd([[nnoremap <silent><c-/> <Cmd>exe v:count1 . "ToggleTerm"<CR>]])
+vim.cmd([[inoremap <silent><c-/> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>]])
 
 require("xonuto.fun")
 
@@ -64,3 +67,16 @@ noremap({ "n", "v" }, "<f9>", "<C-o>")
 noremap({ "n", "v" }, "<f10>", "<C-i>")
 
 noremap({ "n", "v" }, "<f1>", xonuto.toggle_perfanno)
+
+-- scroll noice.nvim hover doc
+vim.keymap.set({ "n", "i", "s" }, "<c-d>", function()
+  if not require("noice.lsp").scroll(4) then
+    return "<c-d>"
+  end
+end, { silent = true, expr = true })
+
+vim.keymap.set({ "n", "i", "s" }, "<c-u>", function()
+  if not require("noice.lsp").scroll(-4) then
+    return "<c-u>"
+  end
+end, { silent = true, expr = true })
