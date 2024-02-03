@@ -25,6 +25,55 @@ return {
       return old_opts
     end,
   },
+  {
+    "folke/noice.nvim",
+    ---@param old_opts NoiceConfig
+    opts = function(_, old_opts)
+      if not old_opts.lsp then
+        ---@diagnostic disable-next-line: inject-field
+        old_opts.lsp = {}
+      end
+      if not old_opts.lsp.hover then
+        old_opts.lsp.hover = {}
+      end
+      old_opts.lsp.hover.opts = {
+        close = {
+          keys = { "q", "<Esc>" },
+        },
+      }
+      return old_opts
+    end,
+  },
+  { import = "lazyvim.plugins.extras.ui.edgy" },
+  {
+    "folke/edgy.nvim",
+    ---@param opts Edgy.Config
+    opts = function(_, opts)
+      if not opts.animate then
+        ---@diagnostic disable-next-line: inject-field
+        opts.animate = {}
+      end
+      opts.animate.enabled = false
+      -- opts.animate.cps = 180
+      return opts
+    end,
+    config = function(_, opts)
+      require("edgy").setup(opts)
+    end,
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    opts = {
+      direction = "float",
+      float_opts = {
+        border = "none",
+      },
+    },
+  },
+  {
+    "voldikss/vim-floaterm",
+  },
+  { "FabijanZulj/blame.nvim" },
   -- {
   --   "soulis-1256/hoverhints.nvim",
   --   opts = true,

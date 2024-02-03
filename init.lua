@@ -12,8 +12,8 @@ local function setenv(env, value)
   end
 end
 
-vim.fn.setenv("VISUAL", "nvr")
-vim.fn.setenv("EDITOR", "nvr")
+vim.fn.setenv("VISUAL", "nvr -l")
+vim.fn.setenv("EDITOR", "nvr -l")
 
 -- TODO: detect dark mode on startup
 local function dark_mode_macos()
@@ -31,8 +31,8 @@ local function dark_mode_macos()
   })
 end
 pcall(dark_mode_macos)
-
 local guifont = "JetbrainsMono Nerd Font Mono"
+
 if string.find(vim.o.guifont, guifont) == nil then
   vim.o.guifont = guifont .. ":h15"
 end

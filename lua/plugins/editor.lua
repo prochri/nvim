@@ -111,7 +111,14 @@ return {
   -- },
 
   { "ggandor/flit.nvim", enabled = false },
-  { "akinsho/bufferline.nvim", enabled = true },
+  {
+    "akinsho/bufferline.nvim",
+    enabled = true,
+    opts = function(_, opts)
+      opts.options.mode = "tabs"
+      return opts
+    end,
+  },
   { "ojroques/nvim-bufdel" },
   {
     "luukvbaal/statuscol.nvim",
