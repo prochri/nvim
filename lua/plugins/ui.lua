@@ -55,6 +55,16 @@ return {
       end
       opts.animate.enabled = false
       -- opts.animate.cps = 180
+
+      opts.left = vim.tbl_filter(function(item)
+        return item.title ~= "Neo-Tree Git" and item.title ~= "Neo-Tree Buffers"
+      end, opts.left)
+      table.insert(opts.left, {
+        title = "Overseer",
+        ft = "OverseerList",
+        pinned = true,
+        open = "OverseerOpen",
+      })
       return opts
     end,
     config = function(_, opts)

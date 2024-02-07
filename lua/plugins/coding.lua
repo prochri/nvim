@@ -20,7 +20,7 @@ return {
     opts = {
       symbol_in_winbar = { enable = false },
       lightbulb = {
-        enable = true,
+        enable = false,
         sign = true,
         virtual_text = false,
         update_time = 500,

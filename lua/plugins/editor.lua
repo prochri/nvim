@@ -147,6 +147,8 @@ return {
         bindings = {
           ["<C-h>"] = false,
           ["<C-l>"] = false,
+          ["<C-j>"] = false,
+          ["<C-k>"] = false,
           ["<TAB>"] = "TogglePreview",
           ["q"] = "<cmd>q<cr>",
           ["<ESC>"] = "<cmd>wincmd p<cr>",
