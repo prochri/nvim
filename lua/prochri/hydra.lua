@@ -4,10 +4,10 @@ local cmd = require("hydra.keymap-util").cmd
 local pcmd = require("hydra.keymap-util").pcmd
 
 local myhydras = {}
-if not _G.xonuto then
-  _G.xonuto = {}
+if not _G.prochri then
+  _G.prochri = {}
 end
-_G.xonuto.hydra = myhydras
+_G.prochri.hydra = myhydras
 
 --   local window_hint = [[
 --  ^^^^^^^^^^^^     Move      ^^    Size   ^^   ^^     Split

@@ -19,7 +19,7 @@ return {
     "neovim/nvim-lspconfig",
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- keys[#keys + 1] = { "K", "<cmd>lua _G.xonuto.smart_hover()<cr>" }
+      -- keys[#keys + 1] = { "K", "<cmd>lua _G.prochri.smart_hover()<cr>" }
       keys[#keys + 1] = { "K", false }
     end,
   },

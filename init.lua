@@ -57,6 +57,6 @@ if lunarvim then
   dofile(os.getenv("LUNARVIM_BASE_DIR") .. "/init.lua")
 else
   --- lazyvim
-  require("xonuto.profile")
+  require("prochri.profile")
   require("config.lazy")
 end

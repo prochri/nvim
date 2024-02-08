@@ -25,13 +25,13 @@ return {
       dapui.setup(opts)
       -- Attach DAP UI to DAP events
       dap.listeners.after.event_initialized["dapui_config"] = function()
-        xonuto.dapui.open_in_tab()
+        prochri.dapui.open_in_tab()
       end
       dap.listeners.before.event_terminated["dapui_config"] = function()
-        xonuto.dapui.close_tab()
+        prochri.dapui.close_tab()
       end
       dap.listeners.before.event_exited["dapui_config"] = function()
-        xonuto.dapui.close_tab()
+        prochri.dapui.close_tab()
       end
       -- local ok, json5 = pcall(require, "json5")
       -- print("json5 is ok: ", ok)

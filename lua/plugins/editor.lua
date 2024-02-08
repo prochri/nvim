@@ -163,7 +163,7 @@ return {
       end)
       overseer.add_template_hook({ dir = os.getenv("HOME") .. "/Monorepo/Portal" }, function(task_defn, util)
         if task_defn.args[1] == "run" and task_defn.args[2] == "generate" then
-          util.add_component(task_defn, { "xonuto.on_complete_vim_cmd", vim_cmd = "LspNameRestart graphql" })
+          util.add_component(task_defn, { "prochri.on_complete_vim_cmd", vim_cmd = "LspNameRestart graphql" })
         end
       end)
     end,
@@ -201,7 +201,7 @@ return {
         },
       },
       buf_filter = function(bufnr)
-        return xonuto.project_buffer_filter(bufnr)
+        return prochri.project_buffer_filter(bufnr)
       end,
     },
   },
@@ -368,7 +368,7 @@ return {
             0,
             "n",
             "<C-t>",
-            "<cmd>lua _G.xonuto.start_telescope_qf()<cr>",
+            "<cmd>lua _G.prochri.start_telescope_qf()<cr>",
             { nowait = true, noremap = true }
           )
           vim.api.nvim_buf_set_keymap(0, "n", "<esc>", "<cmd>wincmd p<cr>", { nowait = true, noremap = true })

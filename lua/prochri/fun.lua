@@ -1,5 +1,5 @@
-if not _G.xonuto then
-  _G.xonuto = {}
+if not _G.prochri then
+  _G.prochri = {}
 end
 
 local function get_guifont_info()
@@ -12,13 +12,13 @@ local function set_guifont(fontname, fontsize)
   vim.o.guifont = fontname .. ":h" .. fontsize
 end
 
-function xonuto.increase_fontsize()
+function prochri.increase_fontsize()
   local fontname, fontsize = get_guifont_info()
   fontsize = fontsize + 1
   set_guifont(fontname, fontsize)
 end
 
-function xonuto.decrease_fontsize()
+function prochri.decrease_fontsize()
   local fontname, fontsize = get_guifont_info()
   fontsize = fontsize - 1
   if fontsize == 0 then
@@ -27,7 +27,7 @@ function xonuto.decrease_fontsize()
   set_guifont(fontname, fontsize)
 end
 
-function xonuto.test()
+function prochri.test()
   local wins = vim.api.nvim_list_wins()
   for _, win in ipairs(wins) do
     local buf = vim.api.nvim_win_get_buf(win)
@@ -38,12 +38,12 @@ function xonuto.test()
 end
 
 -- get active window
-function xonuto.get_active_window()
+function prochri.get_active_window()
   local active_window = vim.api.nvim_get_current_win()
   p(vim.api.nvim_win_get_config(active_window))
 end
 
-function xonuto.close_floating()
+function prochri.close_floating()
   local needs_hack = false
   local inactive_floating_wins = vim.fn.filter(vim.api.nvim_list_wins(), function(k, v)
     local file_type = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(v) })
@@ -64,7 +64,7 @@ function xonuto.close_floating()
   end
 end
 
-function xonuto.show_floating()
+function prochri.show_floating()
   local inactive_floating_wins = vim.fn.filter(vim.api.nvim_list_wins(), function(k, v)
     local file_type = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(v) })
     print("file type:", file_type, "buffer", v)
@@ -77,14 +77,14 @@ function xonuto.show_floating()
 end
 
 -- get cursor position and line
-function xonuto.get_cursor_pos()
+function prochri.get_cursor_pos()
   local pos = vim.api.nvim_win_get_cursor(0)[2]
   local line = vim.api.nvim_get_current_line()
   return line, pos
 end
 
 -- find enclosing square braces around position in string
-function xonuto.get_braces_pos(str, pos, open, close)
+function prochri.get_braces_pos(str, pos, open, close)
   local before = string.sub(str, 1, pos):reverse()
   local after = string.sub(str, pos)
   local start_pos
@@ -110,22 +110,22 @@ function xonuto.get_braces_pos(str, pos, open, close)
   end
 end
 
-function xonuto.get_square_braces_pos(line, pos)
-  return xonuto.get_braces_pos(line, pos, "[", "]")
+function prochri.get_square_braces_pos(line, pos)
+  return prochri.get_braces_pos(line, pos, "[", "]")
 end
 
-function xonuto.get_curly_braces_pos(line, pos)
-  return xonuto.get_braces_pos(line, pos, "{}")
+function prochri.get_curly_braces_pos(line, pos)
+  return prochri.get_braces_pos(line, pos, "{}")
 end
 
-function xonuto.get_filename()
-  local line, pos = xonuto.get_cursor_pos()
+function prochri.get_filename()
+  local line, pos = prochri.get_cursor_pos()
   local filename
-  filename = xonuto.get_square_braces_pos(line, pos)
+  filename = prochri.get_square_braces_pos(line, pos)
   if filename ~= "" then
     return filename
   end
-  filename = xonuto.get_curly_braces_pos(line, pos)
+  filename = prochri.get_curly_braces_pos(line, pos)
   if filename ~= "" then
     return filename
   end
@@ -136,8 +136,8 @@ function xonuto.get_filename()
 end
 
 -- open pdf file with given filename without extension in the path specified
-function xonuto.open_pdf()
-  local filename = xonuto.get_filename()
+function prochri.open_pdf()
+  local filename = prochri.get_filename()
   if filename == "" then
     print("No potential file name found")
     return
@@ -154,14 +154,14 @@ end
 
 local notes_path = vim.env.HOME .. "/Notes"
 local daily_notes = notes_path .. "/DeeklyNotes/DailyNotes/"
-xonuto.open_todays_note = function()
+prochri.open_todays_note = function()
   local date = vim.fn.strftime("%Y-%m-%d")
   local file = daily_notes .. date .. ".md"
   print(file)
   vim.cmd.edit(file)
 end
 
-function xonuto.delete_remaing_command_line()
+function prochri.delete_remaing_command_line()
   local cmd = vim.fn.getcmdline()
   local completType = vim.fn.getcmdcompltype()
   if completType == "<Lua function>" then
@@ -172,12 +172,12 @@ function xonuto.delete_remaing_command_line()
   return remaining
 end
 
-function xonuto.start_telescope_qf()
+function prochri.start_telescope_qf()
   vim.cmd("cclose")
   require("telescope.builtin").quickfix()
 end
 
-function xonuto.smart_hover()
+function prochri.smart_hover()
   -- hover fold content
   local winid = require("ufo").peekFoldedLinesUnderCursor()
   if winid then
@@ -207,10 +207,10 @@ local dapui = require("dapui")
 local debug_win = nil
 local debug_tab = nil
 local debug_tabnr = nil
-xonuto.dapui = {}
+prochri.dapui = {}
 
 -- taken from https://github.com/rcarriga/nvim-dap-ui/issues/122#issuecomment-1206389311
-function xonuto.dapui.open_in_tab()
+function prochri.dapui.open_in_tab()
   if debug_win and vim.api.nvim_win_is_valid(debug_win) then
     vim.api.nvim_set_current_win(debug_win)
     return
@@ -224,7 +224,7 @@ function xonuto.dapui.open_in_tab()
   dapui.open()
 end
 
-function xonuto.dapui.close_tab()
+function prochri.dapui.close_tab()
   dapui.close()
 
   if debug_tab and vim.api.nvim_tabpage_is_valid(debug_tab) then
@@ -236,25 +236,25 @@ function xonuto.dapui.close_tab()
   debug_tabnr = nil
 end
 
-function xonuto.dapui.toggle()
+function prochri.dapui.toggle()
   if not debug_win then
-    xonuto.dapui.open_in_tab()
+    prochri.dapui.open_in_tab()
   elseif vim.api.nvim_tabpage_get_number(0) ~= debug_tabnr then
     vim.api.nvim_set_current_tabpage(debug_tabnr)
   else
-    xonuto.dapui.close_tab()
+    prochri.dapui.close_tab()
   end
 end
 
 local async = require("async")
 local ufo = require("ufo")
-function xonuto.foldfun()
+function prochri.foldfun()
   async(function()
     p(await(ufo.getFolds(vim.api.nvim_get_current_buf(), "lsp")))
   end)
 end
 
-function xonuto.fold_lvls()
+function prochri.fold_lvls()
   local lines = vim.fn.line("$")
   local foldlevel_start_stack = {}
   local foldranges = {}
@@ -289,16 +289,16 @@ function xonuto.fold_lvls()
 end
 
 ---@param level integer
-function xonuto.fold_on_lvl_only(level)
-  local foldranges = xonuto.fold_lvls()
+function prochri.fold_on_lvl_only(level)
+  local foldranges = prochri.fold_lvls()
   local filtered_ranges = vim.tbl_filter(function(range)
     return range.level == level + 1
   end, foldranges)
-  xonuto.fold_line_ranges(filtered_ranges)
+  prochri.fold_line_ranges(filtered_ranges)
 end
 
 ---@param line_ranges UfoFoldingRange[]
-function xonuto.fold_line_ranges(line_ranges)
+function prochri.fold_line_ranges(line_ranges)
   local fold = require("ufo.fold")
   local bufnr = vim.api.nvim_get_current_buf()
   local fb = fold.get(bufnr)
@@ -327,7 +327,7 @@ local function get_client(bufnr)
 end
 
 ---@return table|nil
-function xonuto.get_buffer_symbols()
+function prochri.get_buffer_symbols()
   local bufnr = vim.api.nvim_get_current_buf()
   local params = { textDocument = vim.lsp.util.make_text_document_params(bufnr) }
   local client = get_client(bufnr)
@@ -363,8 +363,8 @@ end
 
 -- returns all top level functions/methods from current buffer
 ---@return UfoFoldingRange[]
-function xonuto.get_buffer_functions()
-  local symbols = xonuto.get_buffer_symbols()
+function prochri.get_buffer_functions()
+  local symbols = prochri.get_buffer_symbols()
   -- 6 = Method, 12 = Function
   local allowed_symbols = { [6] = true, [12] = true }
   local ranges = {}
@@ -392,7 +392,7 @@ function xonuto.get_buffer_functions()
   end, ranges)
 
   -- functions may include the docstring. So, find the most fitting folding range.
-  local fold_ranges = xonuto.fold_lvls()
+  local fold_ranges = prochri.fold_lvls()
   local fitting_ranges = {}
   for _, range in ipairs(function_ranges) do
     local most_fitting
@@ -414,32 +414,32 @@ function xonuto.get_buffer_functions()
   return fitting_ranges
 end
 
-function xonuto.fold_functions_ranges()
-  local ranges = xonuto.get_buffer_functions()
+function prochri.fold_functions_ranges()
+  local ranges = prochri.get_buffer_functions()
   for _, range in ipairs(ranges) do
     print(range.startLine, range.endLine)
   end
 end
 
-function xonuto.fold_functions()
-  local ranges = xonuto.get_buffer_functions()
-  xonuto.fold_line_ranges(ranges)
+function prochri.fold_functions()
+  local ranges = prochri.get_buffer_functions()
+  prochri.fold_line_ranges(ranges)
 end
 
 local perfanno_running = false
-function xonuto.toggle_perfanno()
+function prochri.toggle_perfanno()
   local perfanno_lua = require("perfanno.lua_profile")
   if not perfanno_running then
     perfanno_lua.start(1)
     perfanno_running = true
   else
     perfanno_lua.stop()
-    xonuto.show_flamegraph(xonuto.dump_pretty_flamegraph())
+    prochri.show_flamegraph(prochri.dump_pretty_flamegraph())
     perfanno_running = false
   end
 end
 -- hint: to use this, the lua_profile from perfanno must be modified to include the traces in the object
-function xonuto.dump_pretty_flamegraph(reverse)
+function prochri.dump_pretty_flamegraph(reverse)
   local traces = require("perfanno.lua_profile").traces
   local path = vim.fn.tempname()
   if not traces then
@@ -487,7 +487,7 @@ function xonuto.dump_pretty_flamegraph(reverse)
   return path
 end
 
-function xonuto.show_flamegraph(path)
+function prochri.show_flamegraph(path)
   local svg = vim.fn.tempname() .. ".svg"
   local cmd = "inferno-flamegraph " .. path .. " > " .. svg
   vim.fn.jobstart(cmd, {
@@ -497,7 +497,7 @@ function xonuto.show_flamegraph(path)
   })
 end
 
-function xonuto.dap_info()
+function prochri.dap_info()
   local dap = require("dap")
   dap.continue()
   dap.sessions()
@@ -506,7 +506,7 @@ end
 
 -- returns true if the buffer should stay in the list
 -- false if the buffer should not be loaded next time
-function xonuto.project_buffer_filter(bufnr)
+function prochri.project_buffer_filter(bufnr)
   local resession_filter = require("resession").default_buf_filter
   if not resession_filter(bufnr) then
     return false
@@ -554,7 +554,7 @@ vim.api.nvim_create_autocmd("WinLeave", {
   end,
 })
 
-function xonuto.picker_history(prev)
+function prochri.picker_history(prev)
   local state = require("telescope.state")
   local builtin_pickers = require("telescope.builtin")
   local function resume_picker(i)

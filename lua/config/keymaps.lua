@@ -3,8 +3,8 @@
 -- Add any additional keymaps here
 
 require("config.which-key")
-require("xonuto.hydra")
-require("xonuto.fun")
+require("prochri.hydra")
+require("prochri.fun")
 
 local map = vim.keymap.set
 local function noremap(mode, lhs, rhs, opts)
@@ -28,9 +28,9 @@ local function tnoremap(lhs, rhs, opts)
   noremap("t", lhs, rhs, opts)
 end
 
-nnoremap("zf", xonuto.fold_functions, { desc = "fold toplevel functions" })
+nnoremap("zf", prochri.fold_functions, { desc = "fold toplevel functions" })
 for i = 0, 9 do
-  nnoremap("z" .. i, "<cmd>lua xonuto.fold_on_lvl_only(" .. i .. ")<cr>", { desc = "fold on lvl " .. i })
+  nnoremap("z" .. i, "<cmd>lua prochri.fold_on_lvl_only(" .. i .. ")<cr>", { desc = "fold on lvl " .. i })
 end
 
 -- terminal mapping
@@ -47,26 +47,26 @@ tnoremap("<S-BS>", "<BS>")
 vim.cmd([[nnoremap <silent><c-/> <Cmd>exe v:count1 . "ToggleTerm"<CR>]])
 vim.cmd([[inoremap <silent><c-/> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>]])
 
-require("xonuto.fun")
+require("prochri.fun")
 
-nnoremap("K", xonuto.smart_hover)
+nnoremap("K", prochri.smart_hover)
 
-nnoremap("<ESC>", xonuto.close_floating)
-nnoremap("<C-=>", xonuto.increase_fontsize)
-nnoremap("<C-->", xonuto.decrease_fontsize)
+nnoremap("<ESC>", prochri.close_floating)
+nnoremap("<C-=>", prochri.increase_fontsize)
+nnoremap("<C-->", prochri.decrease_fontsize)
 inoremap("<C-BS>", "<C-w>")
 cnoremap("<C-BS>", "<C-w>")
 inoremap("<D-v>", "<C-o>p")
 cnoremap("<D-v>", "<C-o>p")
 tnoremap("<D-v>", "<C-o>p")
-cnoremap("<C-k>", "<C-\\>ev:lua.xonuto.delete_remaing_command_line()<cr>")
+cnoremap("<C-k>", "<C-\\>ev:lua.prochri.delete_remaing_command_line()<cr>")
 
 map("n", "<C-LeftMouse>", "<LeftMouse>gd")
 map("n", "<MiddleMouse>", "<LeftMouse>gd")
 noremap({ "n", "v" }, "<f9>", "<C-o>")
 noremap({ "n", "v" }, "<f10>", "<C-i>")
 
-noremap({ "n", "v" }, "<f1>", xonuto.toggle_perfanno)
+noremap({ "n", "v" }, "<f1>", prochri.toggle_perfanno)
 
 -- scroll noice.nvim hover doc
 vim.keymap.set({ "n", "i", "s" }, "<c-d>", function()
