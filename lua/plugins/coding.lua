@@ -1,16 +1,14 @@
 return {
   {
     "t-troebst/perfanno.nvim",
+    event = "VeryLazy",
     opts = true,
-  },
-  {
-    "stevearc/profile.nvim",
   },
   -- often used for parsing json5 files from vscode
   {
     "Joakker/lua-json5",
     build = "./install.sh",
-    lazy = false,
+    lazy = true,
     config = function()
       require("json5")
     end,

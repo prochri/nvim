@@ -150,6 +150,7 @@ return {
   -- tasks
   {
     "stevearc/overseer.nvim",
+    event = "VeryLazy",
     opts = {
       task_list = {
         bindings = {
@@ -280,10 +281,12 @@ return {
   {
     dir = "~/git/telescope-picker-history-action",
     dependencies = { "nvim-telescope/telescope.nvim" },
+    lazy = true,
     opts = true,
   },
   {
     dir = "~/git/telescope-all-recent.nvim",
+    lazy = true,
     dependencies = { "nvim-telescope/telescope.nvim", "kkharji/sqlite.lua", "stevearc/dressing.nvim" },
     opts = {
       -- debug = true,
@@ -389,6 +392,7 @@ return {
   {
     "NeogitOrg/neogit",
     dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "Neogit",
     opts = {
       disable_commit_confirmation = true,
       integrations = {
@@ -470,9 +474,9 @@ return {
       })
     end,
   },
-
   {
     "atusy/telescomp",
+    enabled = false,
     config = function()
       local cmdline_builtin = require("telescomp.cmdline.builtin")
       -- complete with `getcompletion`
