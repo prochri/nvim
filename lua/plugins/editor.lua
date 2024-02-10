@@ -1,3 +1,9 @@
+local old = "daqii18n()<Esc><C-L>pA:<Space>{<CR>de:<Space><Esc>pA,<Esc>k:DeepL!<CR>0yt:<C-H>P"
+local new = "caqi18n()<Esc><C-L>pA:<Space>{<CR>de:<Space><Esc>pA,<CR><Esc>C},<Esc>h%:DeepL!<CR>0yt:jjo<Esc><C-H>P"
+local new =
+  "caqi18n()<Esc><C-L>pA:<Space>{<CR>de:<Space><Esc>pA,<CR><Esc>C},<Esc>h%:DeepL!<CR>0yt:jjo<Esc><C-H>P<C-L>jddk<C-H>"
+vim.keymap.set("n", "<leader>tt", new, { remap = true })
+
 return {
   {
     "kylechui/nvim-surround",
@@ -10,6 +16,8 @@ return {
     -- override flash accordingly
     dependencies = {
       "folke/flash.nvim",
+      -- deactivate it, it is shitty for t and f, fucks up macros and the s to snipe does not work as expected
+      enabled = false,
       keys = function(spec, old_keys)
         -- stylua: ignore
         local new_keys = {
@@ -487,5 +495,23 @@ return {
   },
   {
     "tpope/vim-rsi",
+  },
+
+  {
+    "kr40/nvim-macros",
+    cmd = { "MacroSave", "MacroYank", "MacroSelect", "MacroDelete" },
+    opts = {
+
+      json_file_path = vim.fs.normalize(vim.fn.stdpath("config") .. "/macros.json"), -- Location where the macros will be stored
+      default_macro_register = "q", -- Use as default register for :MacroYank and :MacroSave and :MacroSelect Raw functions
+      json_formatter = "none", -- can be "none" | "jq" | "yq" used to pretty print the json file (jq or yq must be installed!)
+    },
+  },
+  {
+    "gw31415/deepl-commands.nvim",
+    dependencies = {
+      "gw31415/deepl.vim",
+    },
+    opts = true,
   },
 }
