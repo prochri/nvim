@@ -14,6 +14,9 @@ end
 
 vim.fn.setenv("VISUAL", "nvr -l")
 vim.fn.setenv("EDITOR", "nvr -l")
+-- tsserver hello :)
+vim.fn.setenv("NODE_OPTIONS", "--max_old_space_size=16384")
+vim.fn.setenv("TSS_LOG", "-level trace -file /Users/christophprobst/tmp/tss/tss.log")
 
 -- TODO: detect dark mode on startup
 local function dark_mode_macos()

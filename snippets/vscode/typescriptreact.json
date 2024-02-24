@@ -1,0 +1,12 @@
+{
+  "Translation File Template": {
+    "prefix": "translationimport",
+    "body": "import translations from \"./translations\";\nimport { useTranslations } from \"@/Global/Internationalization/useTranslations\";",
+    "description": "Translation File Template"
+  },
+  "Translation hook": {
+    "prefix": "i18n",
+    "body": "const { i18n } = useTranslations(translations$0);",
+    "description": "Translation hook"
+  }
+}

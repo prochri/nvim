@@ -25,10 +25,10 @@ return {
       },
     },
   },
-  {
-    "smjonas/inc-rename.nvim",
-    opts = true,
-  },
+  -- {
+  --   "smjonas/inc-rename.nvim",
+  --   opts = true,
+  -- },
   {
     "onsails/diaglist.nvim",
     config = function()

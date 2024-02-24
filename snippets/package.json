@@ -13,6 +13,14 @@
       {
         "language": "lua",
         "path": "./vscode/lua.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./vscode/typescript.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./vscode/typescriptreact.json"
       }
     ]
   }

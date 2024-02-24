@@ -1,0 +1,7 @@
+{
+  "Translation File Template": {
+    "prefix": "translationfile",
+    "body": "import type { I18NDict } from \"@reonic/shared-utils/src/i18n/types\";\nexport default {} as const satisfies I18NDict;",
+    "description": "Translation File Template"
+  }
+}
