@@ -3,6 +3,7 @@ return {
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "lazyvim.plugins.extras.lang.python" },
   { import = "plugins.extras.lang.typescript" },
+  { import = "lazyvim.plugins.extras.linting.eslint" },
   { import = "plugins.extras.lang.prisma" },
   { import = "lazyvim.plugins.extras.lang.tailwind" },
   -- TODO: graphql
