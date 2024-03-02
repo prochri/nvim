@@ -152,7 +152,8 @@ if ok then
     if opts.args == "" then
       opts.args = nil
     end
-    resession.load(opts.args)
+    -- require("resession").load(opts.args)
+    require("prochri.resession").resession_load_or_switch(opts.args)
   end, {})
 end
 
