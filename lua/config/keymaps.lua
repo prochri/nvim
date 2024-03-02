@@ -33,6 +33,10 @@ for i = 0, 9 do
   nnoremap("z" .. i, "<cmd>lua prochri.fold_on_lvl_only(" .. i .. ")<cr>", { desc = "fold on lvl " .. i })
 end
 
+---@see https://www.reddit.com/r/neovim/comments/10b7e5x/comment/j49q3x2/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+nnoremap("gf", "gF")
+nnoremap("gf", "<cmd>e <cfile><cr>")
+
 -- terminal mapping
 local terminal_escape = "<C-\\><C-n>"
 tnoremap("<C-Esc>", terminal_escape)
