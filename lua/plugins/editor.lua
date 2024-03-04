@@ -1,5 +1,3 @@
-local old = "daqii18n()<Esc><C-L>pA:<Space>{<CR>de:<Space><Esc>pA,<Esc>k:DeepL!<CR>0yt:<C-H>P"
-local new = "caqi18n()<Esc><C-L>pA:<Space>{<CR>de:<Space><Esc>pA,<CR><Esc>C},<Esc>h%:DeepL!<CR>0yt:jjo<Esc><C-H>P"
 local new =
   "caqi18n()<Esc><C-L>pA:<Space>{<CR>de:<Space><Esc>pA,<CR><Esc>C},<Esc>h%:DeepL!<CR>0yt:jjo<Esc><C-H>P<C-L>jddk<C-H>"
 vim.keymap.set("n", "<leader>tt", new, { remap = true })

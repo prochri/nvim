@@ -22,6 +22,12 @@ return {
       -- keys[#keys + 1] = { "K", "<cmd>lua _G.prochri.smart_hover()<cr>" }
       keys[#keys + 1] = { "K", false }
     end,
+    opts = function(_spec, opts)
+      opts.inlay_hints = {
+        enabled = true,
+      }
+      return opts
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -196,7 +202,7 @@ return {
     end,
     init = function(_)
       require("cmp_git").setup({
-        filetypes = { "NeogitCommitMessage", "*" },
+        filetypes = { "NeogitCommitMessage" },
       })
     end,
   },

@@ -1,6 +1,7 @@
 return {
   -- general language
-  { import = "lazyvim.plugins.extras.lang.rust" },
+  -- { import = "lazyvim.plugins.extras.lang.rust" },
+  { import = "plugins.extras.lang.rustacean" },
   { import = "lazyvim.plugins.extras.lang.python" },
   { import = "plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.linting.eslint" },
