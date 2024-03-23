@@ -3,6 +3,7 @@ local new =
 vim.keymap.set("n", "<leader>tt", new, { remap = true })
 
 return {
+  { import = "lazyvim.plugins.extras.editor.harpoon2" },
   {
     "kylechui/nvim-surround",
     opts = {
