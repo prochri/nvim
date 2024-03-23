@@ -514,6 +514,9 @@ return {
     dependencies = {
       "gw31415/deepl.vim",
     },
-    opts = true,
+    opts = function()
+      vim.g.deepl_authkey = vim.fn.getenv("DEEPL_API_KEY")
+      return {}
+    end,
   },
 }
