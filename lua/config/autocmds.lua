@@ -5,7 +5,7 @@
 local home = os.getenv("HOME")
 local keybinding_dir = home .. "/Seafile/Programming/Keybindings"
 local keybind_build = function()
-  vim.fn.jobstart({ "python3", keybinding_dir .. "/test.py" }, {
+  vim.fn.jobstart({ "python3.11", keybinding_dir .. "/test.py" }, {
     cwd = keybinding_dir,
     stdout_buffered = true,
     on_stdout = function(_, data, _)

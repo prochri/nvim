@@ -594,3 +594,22 @@ function prochri.picker_history(prev)
   resume_picker(i)
   state.set_global_key("cached_pickers", cached_picker_copy)
 end
+
+function prochri.log_code_actions()
+  vim.lsp.buf.code_action({
+    filter = function(action)
+      p(action)
+    end,
+  })
+end
+
+function prochri.code_action_import()
+  vim.lsp.buf.code_action({
+    filter = function(action)
+      ---@type string
+      local title = action.title
+      return action.kind == "quickfix" and title:lower():match("import")
+    end,
+    apply = true,
+  })
+end

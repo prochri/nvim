@@ -28,6 +28,8 @@ local function with_process(command, callback)
   handle:close()
   return result
 end
+-- TODO: switch to nvim api, because this is blocking
+-- TODO: do this in parallel
 
 ---@generic T
 ---@param command string

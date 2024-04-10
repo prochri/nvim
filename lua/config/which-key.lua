@@ -14,6 +14,8 @@ map("n", "<leader>vc", "<cmd>VimtexCompile<cr>", {noremap = true, silent = true,
 map("v", "<leader>vc", "<cmd>VimtexCompile<cr>", {noremap = true, silent = true, desc = "Vimtex Compile"})
 map("n", "<leader>vs", "<cmd>VimtexView<cr>", {noremap = true, silent = true, desc = "Vimtex Show"})
 map("v", "<leader>vs", "<cmd>VimtexView<cr>", {noremap = true, silent = true, desc = "Vimtex Show"})
+map("n", "<leader>ci", "<cmd>lua prochri.code_action_import()<cr>", {noremap = true, silent = true, desc = "Import under cursor"})
+map("v", "<leader>ci", "<cmd>lua prochri.code_action_import()<cr>", {noremap = true, silent = true, desc = "Import under cursor"})
 _G.prochri.wk_map["<leader>w"] = { name = "+Window" }
 map("n", "<leader>wh", "<C-w>h", {noremap = true, silent = true, desc = "Focus left"})
 map("v", "<leader>wh", "<C-w>h", {noremap = true, silent = true, desc = "Focus left"})
@@ -65,8 +67,10 @@ map("v", "<leader>pr", "<cmd>OverseerRun<cr>", {noremap = true, silent = true, d
 _G.prochri.wk_map["<leader>pt"] = { name = "+Task Tools" }
 map("n", "<leader>ptt", "<cmd>OverseerToggle<cr>", {noremap = true, silent = true, desc = "Toggle Task Window"})
 map("v", "<leader>ptt", "<cmd>OverseerToggle<cr>", {noremap = true, silent = true, desc = "Toggle Task Window"})
-map("n", "<leader>ptl", "<cmd>OverseerTaskAction<cr>", {noremap = true, silent = true, desc = "Last Task Actions"})
-map("v", "<leader>ptl", "<cmd>OverseerTaskAction<cr>", {noremap = true, silent = true, desc = "Last Task Actions"})
+map("n", "<leader>ptl", "<cmd>OverseerQuickAction<cr>", {noremap = true, silent = true, desc = "Last Task Actions"})
+map("v", "<leader>ptl", "<cmd>OverseerQuickAction<cr>", {noremap = true, silent = true, desc = "Last Task Actions"})
+map("n", "<leader>pto", "<cmd>OverseerQuickAction open<cr>", {noremap = true, silent = true, desc = "Last Task Actions"})
+map("v", "<leader>pto", "<cmd>OverseerQuickAction open<cr>", {noremap = true, silent = true, desc = "Last Task Actions"})
 _G.prochri.wk_map["<leader>o"] = { name = "+Organizational/Obsidian" }
 map("n", "<leader>os", "<cmd>ZkNotes<cr>", {noremap = true, silent = true, desc = "Search notes"})
 map("v", "<leader>os", "<cmd>ZkNotes<cr>", {noremap = true, silent = true, desc = "Search notes"})

@@ -1,5 +1,14 @@
 return {
   {
+    "echasnovski/mini.ai",
+    opts = function(_, opts)
+      opts.custom_textobjects.f = opts.custom_textobjects.u
+      opts.custom_textobjects.F = opts.custom_textobjects.U
+      opts.custom_textobjects.c = opts.custom_textobjects.u
+      opts.custom_textobjects.C = opts.custom_textobjects.U
+    end,
+  },
+  {
     "folke/tokyonight.nvim",
     opts = {
       style = "storm",

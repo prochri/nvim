@@ -19,7 +19,6 @@ vim.fn.setenv("TSS_LOG", "-level trace -file /Users/christophprobst/tmp/tss/tss.
 -- load secret environment variables, but do not fail.
 pcall(dofile, os.getenv("HOME") .. "/.config/nvim/secrets.lua")
 
--- TODO: detect dark mode on startup
 local function dark_mode_macos()
   vim.fn.jobstart({ "dark-mode", "status" }, {
     on_stdout = function(_, data, _)

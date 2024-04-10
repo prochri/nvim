@@ -520,4 +520,5 @@ return {
       return {}
     end,
   },
+  { "pwntester/octo.nvim", opts = true },
 }
