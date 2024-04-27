@@ -1,7 +1,7 @@
 return {
   -- general language
+  { import = "plugins.extras.lang.typescript" },
   { import = "plugins.extras.lang.rust" },
-  -- { import = "plugins.extras.lang.typescript" },
   { import = "plugins.extras.lang.prisma" },
   { import = "plugins.extras.lang.prose" },
   { import = "lazyvim.plugins.extras.linting.eslint" },

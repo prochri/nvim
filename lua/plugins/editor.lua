@@ -195,6 +195,8 @@ return {
         if ok then
           neogit.dispatch_reset()
         end
+        vim.opt.title = true
+        vim.opt.titlestring = resession.get_current()
       end)
     end,
     opts = {
@@ -209,7 +211,7 @@ return {
         },
       },
       buf_filter = function(bufnr)
-        return prochri.project_buffer_filter(bufnr)
+        return require("prochri.resession").project_buffer_filter(bufnr)
       end,
     },
   },
@@ -474,37 +476,12 @@ return {
     end,
   },
   {
-    "atusy/telescomp",
-    enabled = false,
-    config = function()
-      local cmdline_builtin = require("telescomp.cmdline.builtin")
-      -- complete with `getcompletion`
-      vim.keymap.set("c", "<C-Space>", function()
-        _G.mycmdcmp()
-      end)
-      vim.keymap.set("c", "<C-X><C-X>", function()
-        _G.mycmdcmp()
-      end)
-    end,
-  },
-  {},
-  {
-    "edluffy/hologram.nvim",
-    config = function()
-      -- require("hologram").setup({
-      --   auto_display = true,
-      -- })
-    end,
-  },
-  {
     "tpope/vim-rsi",
   },
-
   {
     "kr40/nvim-macros",
     cmd = { "MacroSave", "MacroYank", "MacroSelect", "MacroDelete" },
     opts = {
-
       json_file_path = vim.fs.normalize(vim.fn.stdpath("config") .. "/macros.json"), -- Location where the macros will be stored
       default_macro_register = "q", -- Use as default register for :MacroYank and :MacroSave and :MacroSelect Raw functions
       json_formatter = "none", -- can be "none" | "jq" | "yq" used to pretty print the json file (jq or yq must be installed!)

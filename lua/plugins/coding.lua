@@ -8,9 +8,13 @@ return {
   {
     "Joakker/lua-json5",
     build = "./install.sh",
-    lazy = true,
+    -- lazy = true,
     config = function()
-      require("json5")
+      local json5 = require("json5")
+      require("dap.ext.vscode").json_decode = function(...)
+        p("Using json5 for launch.json")
+        json5.parse(...)
+      end
     end,
   },
   {

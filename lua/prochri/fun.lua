@@ -504,39 +504,6 @@ function prochri.dap_info()
   require("dap.ext.vscode")
 end
 
--- returns true if the buffer should stay in the list
--- false if the buffer should not be loaded next time
-function prochri.project_buffer_filter(bufnr)
-  local resession_filter = require("resession").default_buf_filter
-  if not resession_filter(bufnr) then
-    return false
-  end
-
-  local path = vim.api.nvim_buf_get_name(bufnr)
-  if not path then
-    return false
-  end
-
-  -- get file path of bufnr
-  if path:match(".rustup") then
-    return false
-  end
-  if path:match(".cargo") then
-    return false
-  end
-  -- filter out files containing "node_modules"
-  if path:match("node_modules") then
-    return false
-  end
-  -- filter out files not in the current pwd
-  if not path:match(vim.fn.getcwd()) then
-    return false
-  end
-
-  -- otherwise, keep the buffer
-  return true
-end
-
 local phist_state = nil
 local in_telescope_history = false
 local telescope_phist = "telescope-phist"
@@ -612,4 +579,24 @@ function prochri.code_action_import()
     end,
     apply = true,
   })
+end
+
+--- iterate over all windows and print their filetype and buffer type
+function prochri.log_windows()
+  local wins = vim.api.nvim_list_wins()
+  for _, win in ipairs(wins) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
+    local buftype = vim.api.nvim_buf_get_option(buf, "buftype")
+    print("Window: ", win, "Filetype: ", filetype, "Buftype: ", buftype)
+  end
+end
+
+--- yank diagnostic under cursor
+function prochri.yank_diagnostic()
+  local error = vim.lsp.diagnostic.get_line_diagnostics()
+  if error[1] then
+    local message = error[1].message
+    vim.fn.setreg("*", message)
+  end
 end

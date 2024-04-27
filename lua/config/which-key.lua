@@ -126,6 +126,8 @@ map("n", "<leader>ep", "<cmd>lua vim.diagnostic.goto_prev()<cr>", {noremap = tru
 map("v", "<leader>ep", "<cmd>lua vim.diagnostic.goto_prev()<cr>", {noremap = true, silent = true, desc = "next error"})
 map("n", "<leader>el", "<cmd>Trouble workspace_diagnostics<cr>", {noremap = true, silent = true, desc = "List errors in Trouble"})
 map("v", "<leader>el", "<cmd>Trouble workspace_diagnostics<cr>", {noremap = true, silent = true, desc = "List errors in Trouble"})
+map("n", "<leader>ey", "<cmd>lua prochri.yank_diagnostic()<cr>", {noremap = true, silent = true, desc = "Yank first error"})
+map("v", "<leader>ey", "<cmd>lua prochri.yank_diagnostic()<cr>", {noremap = true, silent = true, desc = "Yank first error"})
 _G.prochri.wk_map["<leader>q"] = { name = "+Quickfix" }
 map("n", "<leader>qt", "<cmd>TodoQuickFix<cr>", {noremap = true, silent = true, desc = "Todo items in project"})
 map("v", "<leader>qt", "<cmd>TodoQuickFix<cr>", {noremap = true, silent = true, desc = "Todo items in project"})

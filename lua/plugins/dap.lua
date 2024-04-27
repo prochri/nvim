@@ -12,6 +12,7 @@ return {
         firefox = jsts_frontend,
         chrome = jsts_frontend,
         ["pwa-chrome"] = jsts_frontend,
+        node = jsts_frontend,
       }
       return opts
     end,
@@ -33,11 +34,6 @@ return {
       dap.listeners.before.event_exited["dapui_config"] = function()
         prochri.dapui.close_tab()
       end
-      -- local ok, json5 = pcall(require, "json5")
-      -- print("json5 is ok: ", ok)
-      -- if ok then
-      --   require("dap.ext.vscode").json_decode = json5.parse
-      -- end
     end,
     opts = {
       icons = {
