@@ -498,4 +498,9 @@ return {
     end,
   },
   { "pwntester/octo.nvim", opts = true },
+  {
+    "chrisgrieser/nvim-early-retirement",
+    config = true,
+    event = "VeryLazy",
+  },
 }

@@ -1,5 +1,19 @@
 return {
   { import = "lazyvim.plugins.extras.lang.typescript" },
+  {
+    "marilari88/twoslash-queries.nvim",
+    config = function(_, opts)
+      require("twoslash-queries").setup({
+        highlight = "Debug",
+      })
+      require("lazyvim.util.lsp").on_attach(function(client, bufnr)
+        if client.name ~= "tsserver" then
+          return
+        end
+        require("twoslash-queries").attach(client, bufnr)
+      end)
+    end,
+  },
   --- using typescript tools
   -- {
   --   "pmizio/typescript-tools.nvim",

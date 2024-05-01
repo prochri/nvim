@@ -153,7 +153,7 @@ if ok then
       opts.args = nil
     end
     -- require("resession").load(opts.args)
-    require("prochri.resession").resession_load_or_switch(opts.args)
+    require("prochri.resession").load_or_switch(opts.args)
   end, {})
 end
 

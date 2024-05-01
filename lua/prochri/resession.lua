@@ -49,7 +49,7 @@ local function switch_to_session(name)
   local target_server
   nio.first({
     function()
-      nio.sleep(100)
+      nio.sleep(500)
     end,
     function()
       nio.gather(vim.tbl_map(function(p)
@@ -59,6 +59,7 @@ local function switch_to_session(name)
             return
           end
           out = out:gsub("\n", "")
+          print("found nvim instance", out, name)
           if name == out then
             target_server = p.servername
           end
@@ -76,8 +77,18 @@ local function switch_to_session(name)
   return false
 end
 
+function M.load_in_new_neovide(session_name)
+  local cmd = [[!open -n /Applications/Neovide.app  --args -- -c "lua require'resession'.load(']]
+    .. session_name
+    .. [[')"]]
+  vim.schedule(function()
+    vim.cmd(cmd)
+  end)
+end
+
 ---@param name string?
-function M.resession_load_or_switch(name)
+---@param replace_current boolean? default: false
+function M.load_or_switch(name, replace_current)
   local current = resession.get_current()
   nio.run(function()
     ---@param session string?
@@ -89,6 +100,10 @@ function M.resession_load_or_switch(name)
         return
       end
       if not switch_to_session(session) then
+        if current and not replace_current then
+          M.load_in_new_neovide(session)
+          return
+        end
         -- NOTE: needed, as it must be save to access nvim api functions
         vim.schedule(function()
           resession.load(session)
@@ -97,6 +112,7 @@ function M.resession_load_or_switch(name)
     end
     if name ~= nil then
       load_or_switch(name)
+      return
     end
     local sessions = resession.list()
     if vim.tbl_isempty(sessions) then
