@@ -12,7 +12,7 @@ return {
       "folke/flash.nvim",
       -- deactivate it, it is shitty for t and f, fucks up macros and the s to snipe does not work as expected
       enabled = false,
-      keys = function(spec, old_keys)
+      keys = function()
         -- stylua: ignore
         local new_keys = {
           { "s",     mode = { "n" },      function() require("flash").jump() end,              desc = "Flash" },

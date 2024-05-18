@@ -75,7 +75,6 @@ return {
   { import = "lazyvim.plugins.extras.ui.edgy" },
   {
     "folke/edgy.nvim",
-    ---@param opts Edgy.Config
     opts = function(_, opts)
       if not opts.animate then
         ---@diagnostic disable-next-line: inject-field
