@@ -6,18 +6,51 @@ return {
     end,
   },
   {
-    "mickael-menu/zk-nvim",
-    config = function()
-      require("zk").setup({
-        picker = "telescope",
-        lsp = {
-          auto_attach = {
-            enabled = true,
-            filetypes = { "markdown" },
-          },
-        },
-      })
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed, { "markdown", "markdown_inline" })
+      end
     end,
+  },
+  {
+    "epwalsh/obsidian.nvim",
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "Notes",
+          path = "~/Notes",
+        },
+      },
+      daily_notes = {
+        folder = "DeeklyNotes/DailyNotes",
+        template = "Bemplates/DailyNoteTemplate.md",
+      },
+      completion = {
+        nvim_cmp = false,
+      },
+      templates = {
+        folder = "Bemplates",
+      },
+      mappings = {},
+      new_notes_location = "current_dir",
+      preferred_link_style = "wiki",
+      disable_frontmatter = true,
+      open_app_foreground = true,
+      ui = {
+        checkboxes = {
+          [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+          ["x"] = { char = "", hl_group = "ObsidianDone" },
+          [">"] = { char = "", hl_group = "ObsidianRightArrow" },
+          ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+        },
+      },
+    },
   },
   -- for latex
   {

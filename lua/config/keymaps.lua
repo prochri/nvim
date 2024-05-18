@@ -72,7 +72,7 @@ noremap({ "n", "v" }, "<f10>", "<C-i>")
 
 noremap({ "n", "v" }, "<f1>", prochri.toggle_perfanno)
 
-function load_session_f(name)
+local function load_session_f(name)
   return function()
     require("prochri.resession").load_or_switch(name)
   end
@@ -81,8 +81,10 @@ end
 noremap({ "n", "i", "v", "x" }, "<D-1>", load_session_f("Portal"))
 noremap({ "n", "i", "v", "x" }, "<D-2>", load_session_f("API"))
 noremap({ "n", "i", "v", "x" }, "<D-3>", load_session_f("Simulation"))
-noremap({ "n", "i", "v", "x" }, "<D-4>", load_session_f("tsserver-plugin"))
-noremap({ "n", "i", "v", "x" }, "<D-5>", load_session_f("_SharedUtils"))
+noremap({ "n", "i", "v", "x" }, "<D-4>", load_session_f("_SharedUtils"))
+noremap({ "n", "i", "v", "x" }, "<D-5>", load_session_f("Notes"))
+noremap({ "n", "i", "v", "x" }, "<D-6>", load_session_f("tsserver-plugin"))
+noremap({ "n", "i", "v", "x" }, "<D-0>", load_session_f("nvim-config"))
 
 -- scroll noice.nvim hover doc
 vim.keymap.set({ "n", "i", "s" }, "<c-d>", function()

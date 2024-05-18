@@ -2,6 +2,9 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+-- remove some of the default autocmds
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
 local home = os.getenv("HOME")
 local keybinding_dir = home .. "/Seafile/Programming/Keybindings"
 local keybind_build = function()
