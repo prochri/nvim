@@ -4,6 +4,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function(spec, old_opts)
+      -- add full relative path to lualine
       local lualine_c = old_opts.sections.lualine_c
       local function mypretty_path(self)
         local path = vim.fn.expand("%:p") --[[@as string]]
@@ -23,6 +24,33 @@ return {
       end
       lualine_c[#lualine_c] = mypretty_path
       return old_opts
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    enabled = true,
+    opts = function(_, opts)
+      -- only show if there are multiple tabs
+      opts.options.mode = "tabs"
+      return opts
+    end,
+  },
+  {
+    "luukvbaal/statuscol.nvim",
+    opts = function(spec, opts)
+      -- NOTE: not an override, but I need to require manually here
+      local builtin = require("statuscol.builtin")
+      return {
+        segments = {
+          { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+          { text = { "%s" }, click = "v:lua.ScSa" },
+          {
+            text = { builtin.lnumfunc, " " },
+            condition = { true, builtin.not_empty },
+            click = "v:lua.ScLa",
+          },
+        },
+      }
     end,
   },
   {
@@ -80,9 +108,7 @@ return {
       },
     },
   },
-  {
-    "voldikss/vim-floaterm",
-  },
+  { "voldikss/vim-floaterm" },
   { "FabijanZulj/blame.nvim" },
   {
     "lewis6991/hover.nvim",
@@ -108,8 +134,89 @@ return {
       -- vim.o.mousemoveevent = true
     end,
   },
-  -- {
-  --   "soulis-1256/hoverhints.nvim",
-  --   opts = true,
-  -- },
+  {
+    "simnalamburt/vim-mundo",
+    dependencies = {
+      "kevinhwang91/nvim-fundo",
+      opts = true,
+      build = function()
+        require("fundo").install()
+      end,
+    },
+  },
+  -- tasks
+  {
+    "stevearc/overseer.nvim",
+    event = "VeryLazy",
+    opts = {
+      task_list = {
+        bindings = {
+          ["<C-h>"] = false,
+          ["<C-l>"] = false,
+          ["<C-j>"] = false,
+          ["<C-k>"] = false,
+          ["<TAB>"] = "TogglePreview",
+          ["q"] = "<cmd>q<cr>",
+          ["<ESC>"] = "<cmd>wincmd p<cr>",
+        },
+      },
+    },
+    config = function(_, opts)
+      local overseer = require("overseer")
+      overseer.setup(opts)
+      overseer.add_template_hook(nil, function(task_defn, util)
+        p(task_defn)
+      end)
+      overseer.add_template_hook({ dir = os.getenv("HOME") .. "/Monorepo/Portal" }, function(task_defn, util)
+        if task_defn.args[1] == "run" and task_defn.args[2] == "generate" then
+          util.add_component(task_defn, { "prochri.on_complete_vim_cmd", vim_cmd = "LspNameRestart graphql" })
+        end
+      end)
+    end,
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    config = function()
+      require("bqf").setup({
+        func_map = {
+          pscrollup = "<C-u>",
+          pscrolldown = "<C-d>",
+          ptogglemode = "P",
+          ptoggleauto = "p",
+          ptoggleitem = "zp",
+        },
+      })
+      local start_telescope = function()
+        vim.cmd("cclose")
+        require("telescope.builtin").quickfix()
+      end
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "qf",
+        callback = function()
+          vim.api.nvim_buf_set_keymap(
+            0,
+            "n",
+            "<C-t>",
+            "<cmd>lua _G.prochri.start_telescope_qf()<cr>",
+            { nowait = true, noremap = true }
+          )
+          vim.api.nvim_buf_set_keymap(0, "n", "<esc>", "<cmd>wincmd p<cr>", { nowait = true, noremap = true })
+          -- -- let treesitter use bash highlight for zsh files as well
+          -- require("nvim-treesitter.highlight").attach(0, "bash")
+        end,
+      })
+    end,
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "Neogit",
+    opts = {
+      disable_commit_confirmation = true,
+      integrations = {
+        telescope = true,
+      },
+    },
+  },
+  { "pwntester/octo.nvim", opts = true },
 }
