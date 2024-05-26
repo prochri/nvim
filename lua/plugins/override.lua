@@ -1,5 +1,4 @@
 return {
-  { import = "lazyvim.plugins.extras.coding.mini-ai" },
   { import = "lazyvim.plugins.extras.ui.treesitter-context" },
   {
     "echasnovski/mini.ai",
@@ -61,6 +60,7 @@ return {
       return opts
     end,
   },
+  { import = "lazyvim.plugins.extras.coding.luasnip" },
   {
     "hrsh7th/nvim-cmp",
     dependencies = { "hrsh7th/cmp-emoji", { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } } },
@@ -117,6 +117,13 @@ return {
     init = function(_)
       require("cmp_git").setup({
         filetypes = { "NeogitCommitMessage" },
+      })
+      require("cmp").setup.filetype({ "sql" }, {
+        sources = {
+          { name = "vim-dadbod-completion" },
+          { name = "buffer" },
+          { name = "git" },
+        },
       })
     end,
   },

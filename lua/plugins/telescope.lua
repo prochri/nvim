@@ -128,6 +128,9 @@ return {
           resession_load = {
             use_cwd = false,
           },
+          codeaction = {
+            use_cwd = false,
+          },
         },
         -- only fallback, if no kind exists or is found
         prompts = {

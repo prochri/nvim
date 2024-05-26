@@ -55,6 +55,7 @@ function prochri.close_floating()
       and v ~= vim.api.nvim_get_current_win()
       and file_type ~= "hydra_hint"
       and file_type ~= "incline"
+      and file_type ~= "lazy_backdrop"
   end)
   if needs_hack then
     vim.api.nvim_feedkeys("jk", "nt", true)
