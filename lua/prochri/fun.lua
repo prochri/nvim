@@ -193,7 +193,7 @@ function prochri.smart_hover()
   for _, client in ipairs(clients) do
     if client.name == "rust_analyzer" then
       print("rust-analyzer hover")
-      vim.cmd("RustHoverActions")
+      vim.cmd.RustLsp({ "hover", "actions" })
       return
     end
   end
@@ -600,4 +600,9 @@ function prochri.yank_diagnostic()
     local message = error[1].message
     vim.fn.setreg("*", message)
   end
+end
+
+function reload_module(module)
+  package.loaded[module] = nil
+  return require(module)
 end

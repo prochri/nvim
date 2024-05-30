@@ -46,10 +46,10 @@ return {
           ["<PageDown>"] = actions.cycle_history_next,
         },
       }
-      local ok, trouble = pcall(require, "trouble.providers.telescope")
+      local ok, trouble = pcall(require, "trouble.sources.telescope")
       if ok then
-        opts.defaults.mappings.i["<C-t>"] = trouble.open_with_trouble
-        opts.defaults.mappings.n["<C-t>"] = trouble.open_with_trouble
+        opts.defaults.mappings.i["<C-t>"] = trouble.open
+        opts.defaults.mappings.n["<C-t>"] = trouble.open
       end
       opts.defaults.mappings.i["<D-v>"] = { "<C-r>+", type = "command" }
       local history = require("telescope-picker-history-action")
