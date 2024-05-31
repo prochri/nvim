@@ -53,12 +53,12 @@ return {
       -- keys[#keys + 1] = { "K", "<cmd>lua _G.prochri.smart_hover()<cr>" }
       keys[#keys + 1] = { "K", false }
     end,
-    opts = function(_spec, opts)
-      opts.inlay_hints = {
-        enabled = true,
-      }
-      return opts
-    end,
+    -- opts = function(_spec, opts)
+    --   opts.inlay_hints = {
+    --     enabled = true,
+    --   }
+    --   return opts
+    -- end,
   },
   { import = "lazyvim.plugins.extras.coding.luasnip" },
   {
