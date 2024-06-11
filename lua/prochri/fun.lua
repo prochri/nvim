@@ -187,6 +187,7 @@ function prochri.smart_hover()
 
   if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
     require("crates").show_popup()
+    return
   end
   local clients = vim.lsp.get_active_clients()
   -- check if rust-analyzer is active
@@ -248,6 +249,7 @@ function prochri.dapui.toggle()
 end
 
 local async = require("async")
+local await = require("async").wait
 local ufo = require("ufo")
 function prochri.foldfun()
   async(function()
@@ -287,6 +289,45 @@ function prochri.fold_lvls()
     last_foldlevel = last_foldlevel - 1
   end
   return foldranges
+end
+
+function prochri.fold_on_functions()
+  local parser = vim.treesitter.get_parser()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local count = 1
+  parser:for_each_tree(function(tree, langTree)
+    local bufnr = vim.api.nvim_get_current_buf()
+    local root = tree:root()
+    if not root then
+      local first = parser:trees()[1]
+      if not first then
+        return
+      end
+      root = first:root()
+    end
+    local range = { root:range() }
+    local query = vim.treesitter.query.get(parser:language_for_range(range):lang(), "textobjects")
+    if not query then
+      return
+    end
+    for id, node, metadata, match in query:iter_captures(root, bufnr, 0, -1) do
+      local name = query.captures[id]
+      if name ~= "function.outer" then
+        goto continue
+      end
+      local start_line, _, end_line, _ = node:range()
+      vim.cmd(start_line + 1 .. " norm zc")
+      vim.cmd(end_line .. " norm zc")
+      ::continue::
+    end
+  end)
+  vim.api.nvim_win_set_cursor(0, pos)
+end
+do
+  local function x()
+    print("hii")
+    return 1
+  end
 end
 
 ---@param level integer

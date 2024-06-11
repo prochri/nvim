@@ -236,5 +236,13 @@ return {
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  { "pwntester/octo.nvim", opts = true },
+  { import = "lazyvim.plugins.extras.util.octo" },
+  "sindrets/diffview.nvim",
+  {
+    "fredeeb/tardis.nvim",
+    depndencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = true,
+  },
 }

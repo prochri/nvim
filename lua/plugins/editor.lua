@@ -71,7 +71,14 @@ return {
   },
   {
     "kevinhwang91/nvim-ufo",
-    dependencies = { "kevinhwang91/promise-async" },
+    dependencies = {
+      "kevinhwang91/promise-async",
+      {
+        "chrisgrieser/nvim-origami",
+        event = "BufReadPost", -- later or on keypress would prevent saving folds
+        opts = true,
+      },
+    },
     config = function()
       vim.keymap.set("n", "zR", require("ufo").openAllFolds)
       vim.keymap.set("n", "zM", require("ufo").closeAllFolds)

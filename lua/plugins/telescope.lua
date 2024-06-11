@@ -141,4 +141,10 @@ return {
       },
     },
   },
+  {
+    "Sharonex/grape.nvim",
+    keys = {
+      { "<leader>sg", "<cmd>lua require('grape').live_grape()<cr>", desc = "Fuzzier live grep" },
+    },
+  },
 }

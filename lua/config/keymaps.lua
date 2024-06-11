@@ -53,7 +53,9 @@ vim.cmd([[inoremap <silent><c-/> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>]])
 
 require("prochri.fun")
 
-nnoremap("K", prochri.smart_hover)
+nnoremap("K", function()
+  prochri.smart_hover()
+end)
 
 nnoremap("<ESC>", prochri.close_floating)
 nnoremap("<C-=>", prochri.increase_fontsize)

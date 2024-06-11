@@ -124,8 +124,8 @@ map("n", "<leader>en", "<cmd>lua vim.diagnostic.goto_next()<cr>", {noremap = tru
 map("v", "<leader>en", "<cmd>lua vim.diagnostic.goto_next()<cr>", {noremap = true, silent = true, desc = "next error"})
 map("n", "<leader>ep", "<cmd>lua vim.diagnostic.goto_prev()<cr>", {noremap = true, silent = true, desc = "next error"})
 map("v", "<leader>ep", "<cmd>lua vim.diagnostic.goto_prev()<cr>", {noremap = true, silent = true, desc = "next error"})
-map("n", "<leader>el", "<cmd>Trouble workspace_diagnostics<cr>", {noremap = true, silent = true, desc = "List errors in Trouble"})
-map("v", "<leader>el", "<cmd>Trouble workspace_diagnostics<cr>", {noremap = true, silent = true, desc = "List errors in Trouble"})
+map("n", "<leader>el", "<cmd>Trouble diagnostics<cr>", {noremap = true, silent = true, desc = "List errors in Trouble"})
+map("v", "<leader>el", "<cmd>Trouble diagnostics<cr>", {noremap = true, silent = true, desc = "List errors in Trouble"})
 map("n", "<leader>ey", "<cmd>lua prochri.yank_diagnostic()<cr>", {noremap = true, silent = true, desc = "Yank first error"})
 map("v", "<leader>ey", "<cmd>lua prochri.yank_diagnostic()<cr>", {noremap = true, silent = true, desc = "Yank first error"})
 _G.prochri.wk_map["<leader>q"] = { name = "+Quickfix" }
