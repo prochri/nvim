@@ -23,4 +23,21 @@ local function toggle_profile()
     prof.start("*")
   end
 end
+
+local profiling_plenary_running = false
+local filename = "/tmp/neovim_profile.log"
+local function toggle_profile2()
+  local profile = require("plenary.profile")
+  if profiling_plenary_running then
+    profile.stop()
+    profiling_plenary_running = false
+    vim.cmd("silent! !inferno-flamegraph " .. filename .. " > /tmp/neovim_profile.svg")
+    vim.cmd("silent! !open /tmp/neovim_profile.svg")
+  else
+    profile.start(filename, { flame = true })
+    profiling_plenary_running = true
+  end
+end
+
 vim.keymap.set("", "<f1>", toggle_profile)
+vim.keymap.set("", "<f2>", toggle_profile2)

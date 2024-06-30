@@ -1,12 +1,44 @@
+---@module 'noice'
 return {
   { import = "lazyvim.plugins.extras.ui.treesitter-context" },
   {
+    "folke/noice.nvim",
+    opts = function(_, opts)
+      opts.presets.bottom_search = false
+      ---@type NoiceRouteConfig[]
+      local routes = {
+        {
+          view = "notify",
+          filter = {
+            event = "notify",
+            kind = "error",
+            find = "vtsls.*inlayHint",
+          },
+          opts = {
+            skip = true,
+          },
+        },
+      }
+      for _, route in ipairs(routes) do
+        table.insert(opts.routes, route)
+      end
+      return opts
+    end,
+  },
+  -- { "folke/trouble.nvim", enabled = false },
+  {
     "echasnovski/mini.ai",
     opts = function(_, opts)
+      local ai = require("mini.ai")
       opts.custom_textobjects.f = opts.custom_textobjects.u
       opts.custom_textobjects.F = opts.custom_textobjects.U
       opts.custom_textobjects.c = opts.custom_textobjects.u
       opts.custom_textobjects.C = opts.custom_textobjects.U
+      -- opts.custom_textobjects.t = ai.gen_spec.treesitter({
+      --   a = "@jsxtag.outer",
+      --   i = "@jsxtag.inner",
+      -- })
+      opts.search_method = "cover"
     end,
   },
   {

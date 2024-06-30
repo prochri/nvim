@@ -59,7 +59,6 @@ local function switch_to_session(name)
             return
           end
           out = out:gsub("\n", "")
-          print("found nvim instance", out, name)
           if name == out then
             target_server = p.servername
           end
@@ -78,7 +77,7 @@ local function switch_to_session(name)
 end
 
 function M.load_in_new_neovide(session_name)
-  local cmd = [[!open -n /Applications/Neovide.app  --args -- -c"lua require'resession'.load(']]
+  local cmd = [[silent! !open -n /Applications/Neovide.app  --args -- -c"lua require'resession'.load(']]
     .. session_name
     .. [[')"]]
   vim.schedule(function()

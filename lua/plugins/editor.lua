@@ -76,7 +76,11 @@ return {
       {
         "chrisgrieser/nvim-origami",
         event = "BufReadPost", -- later or on keypress would prevent saving folds
-        opts = true,
+        opts = {
+          pauseFoldsOnSearch = true,
+          keepFoldsAcrossSessions = false,
+          setupFoldKeymaps = false,
+        },
       },
     },
     config = function()

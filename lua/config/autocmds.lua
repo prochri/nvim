@@ -65,36 +65,6 @@ local disable_feature = {
   end,
 }
 
-local function check_bigfile(event)
-  local buf = event.buf
-  local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-  if not ok or not stats then
-    return
-  end
-
-  local rules = ft_disable_kb.default
-  local filetype = vim.bo[buf].ft
-  if ft_disable_kb[filetype] then
-    rules = ft_disable_kb[filetype]
-  end
-  for max_filesize, value in pairs(rules) do
-    if stats.size > max_filesize * 1024 then
-      for _, feature in ipairs(value) do
-        if disable_feature[feature] then
-          disable_feature[feature](buf)
-        end
-      end
-    end
-  end
-end
-vim.api.nvim_create_augroup("large_file_size", {})
-vim.api.nvim_create_autocmd("BufReadPost", {
-  group = "large_file_size",
-  pattern = "*",
-  -- enable wrap mode for json files only
-  callback = check_bigfile,
-})
-
 local function on_dir_change(event)
   -- local ok, neogit = pcall(require, "neogit")
   -- if ok then

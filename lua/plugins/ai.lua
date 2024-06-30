@@ -11,6 +11,9 @@ return {
             enabled = true,
             auto_trigger = true,
           },
+          filetypes = {
+            bigfile = false,
+          },
         })
       end, 100)
     end,
