@@ -1,4 +1,5 @@
 return {
+  { import = "lazyvim.plugins.extras.lsp.neoconf" },
   {
     "t-troebst/perfanno.nvim",
     event = "VeryLazy",

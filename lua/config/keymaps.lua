@@ -64,7 +64,7 @@ inoremap("<C-BS>", "<C-w>")
 cnoremap("<C-BS>", "<C-w>")
 inoremap("<D-v>", "<C-o>p")
 cnoremap("<D-v>", "<C-o>p")
-tnoremap("<D-v>", "<C-o>p")
+tnoremap("<D-v>", terminal_escape .. "p")
 cnoremap("<C-k>", "<C-\\>ev:lua.prochri.delete_remaing_command_line()<cr>")
 
 map("n", "<C-LeftMouse>", "<LeftMouse>gd")
@@ -85,18 +85,21 @@ noremap({ "n", "i", "v", "x" }, "<D-2>", load_session_f("API"))
 noremap({ "n", "i", "v", "x" }, "<D-3>", load_session_f("Simulation"))
 noremap({ "n", "i", "v", "x" }, "<D-4>", load_session_f("_SharedUtils"))
 noremap({ "n", "i", "v", "x" }, "<D-5>", load_session_f("Notes"))
-noremap({ "n", "i", "v", "x" }, "<D-6>", load_session_f("tsserver-plugin"))
+noremap({ "n", "i", "v", "x" }, "<D-6>", load_session_f("translation-tool"))
 noremap({ "n", "i", "v", "x" }, "<D-0>", load_session_f("nvim-config"))
 
+local ok, noice_lsp = pcall(require, "noice.lsp")
 -- scroll noice.nvim hover doc
-vim.keymap.set({ "n", "i", "s" }, "<c-d>", function()
-  if not require("noice.lsp").scroll(4) then
-    return "<c-d>"
-  end
-end, { silent = true, expr = true })
+if ok then
+  vim.keymap.set({ "n", "i", "s" }, "<c-d>", function()
+    if noice_lsp.scroll(4) then
+      return "<c-d>"
+    end
+  end, { silent = true, expr = true })
 
-vim.keymap.set({ "n", "i", "s" }, "<c-u>", function()
-  if not require("noice.lsp").scroll(-4) then
-    return "<c-u>"
-  end
-end, { silent = true, expr = true })
+  vim.keymap.set({ "n", "i", "s" }, "<c-u>", function()
+    if noice_lsp.scroll(-4) then
+      return "<c-u>"
+    end
+  end, { silent = true, expr = true })
+end

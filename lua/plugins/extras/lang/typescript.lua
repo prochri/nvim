@@ -3,8 +3,29 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      opts.servers.vtsls.settings.vtsls.autoUseWorkspaceTsdk = true
+      ---@type lspconfig.settings.vtsls
+      local settings = opts.servers.vtsls.settings
+      settings.vtsls.autoUseWorkspaceTsdk = true
+      -- this seems to be slower than client side filtering
+      settings.vtsls.enableServerSideFuzzyMatch = true
+      settings.vtsls.experimental = settings.vtsls.experimental or {}
+      settings.vtsls.experimental.maxInlayHintLength = 50
+      settings.typescript.tsserver = settings.typescript.tsserver or {}
+      settings.typescript.tsserver.maxTsServerMemory = 8096
+      settings.typescript.watchOptions = {
+        watchFile = "useFsEvents",
+        watchDirectory = "useFsEvents",
+      }
+
       return opts
+    end,
+  },
+  {
+    "yioneko/nvim-vtsls",
+    lazy = true,
+    opts = {},
+    config = function(_, opts)
+      require("vtsls").config(opts)
     end,
   },
   -- using the old lazyvim typescript

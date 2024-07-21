@@ -40,6 +40,9 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
+        vtsls = {
+          enabled = false,
+        },
         ---@type lspconfig.options.tsserver
         tsserver = {
           keys = {

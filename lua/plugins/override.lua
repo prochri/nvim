@@ -1,8 +1,13 @@
 ---@module 'noice'
+vim.defer_fn(function()
+  vim.cmd([[set cmdheight=1]])
+end, 1000)
 return {
   { import = "lazyvim.plugins.extras.ui.treesitter-context" },
+  -- { "rcarriga/nvim-notify", enabled = false },
   {
     "folke/noice.nvim",
+    enabled = false,
     opts = function(_, opts)
       opts.presets.bottom_search = false
       ---@type NoiceRouteConfig[]

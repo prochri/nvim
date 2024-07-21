@@ -35,9 +35,6 @@ local comp = {
       on_complete = function(self, task, status)
         if lookup[status] then
           vim.cmd(params.vim_cmd)
-          local level = util.status_to_log_level(status)
-          local message = string.format("'%s' finished.\nRunning vim cmd '%s'", task.name, params.vim_cmd)
-          self.notifier:notify(message, level)
         end
       end,
     }

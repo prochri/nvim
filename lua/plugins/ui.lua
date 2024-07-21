@@ -108,7 +108,7 @@ return {
     },
   },
   { "voldikss/vim-floaterm" },
-  { "FabijanZulj/blame.nvim" },
+  { "FabijanZulj/blame.nvim", opts = true },
   {
     "lewis6991/hover.nvim",
     config = function()
