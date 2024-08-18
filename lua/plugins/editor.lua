@@ -1,4 +1,35 @@
 return {
+  { "tpope/vim-repeat", event = "VeryLazy" },
+  {
+    "ggandor/flit.nvim",
+    enabled = true,
+    keys = function()
+      ---@type LazyKeysSpec[]
+      local ret = {}
+      for _, key in ipairs({ "f", "F", "t", "T" }) do
+        ret[#ret + 1] = { key, mode = { "n", "x", "o" } }
+      end
+      return ret
+    end,
+    opts = { labeled_modes = "nx" },
+  },
+  {
+    "ggandor/leap.nvim",
+    enabled = true,
+    keys = {
+      { "s", "<Plug>(leap-forward)", mode = { "n", "o" }, desc = "Leap Forward" },
+      { "S", "<Plug>(leap-backward)", mode = { "n", "o" }, desc = "Leap Backward" },
+      { "z", "<Plug>(leap-forward)", mode = { "x", "o" }, desc = "Leap Forward" },
+      { "Z", "<Plug>(leap-backward)", mode = { "x", "o" }, desc = "Leap Backward" },
+      { "gs", "<Plug>(leap-from-window)", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
+    },
+    config = function(_, opts)
+      local leap = require("leap")
+      for k, v in pairs(opts) do
+        leap.opts[k] = v
+      end
+    end,
+  },
   {
     "kylechui/nvim-surround",
     opts = {
