@@ -173,10 +173,9 @@ function M.project_buffer_filter(bufnr)
     return false
   end
   -- filter out files not in the current pwd
-  if not path:match(vim.fn.getcwd()) then
+  if not path:find(vim.fn.getcwd(), 0, true) then
     return false
   end
-
   -- otherwise, keep the buffer
   return true
 end
