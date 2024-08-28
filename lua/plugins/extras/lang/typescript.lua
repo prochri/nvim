@@ -31,6 +31,17 @@ return {
   -- },
   -- using the old lazyvim typescript
   { import = "plugins.extras.lang.typescript_lazyvim_old" },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   opts = {},
+  -- },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = function(_, opts)
+  --     opts.servers.tsserver = { enabled = false }
+  --   end,
+  -- },
   {
     "marilari88/twoslash-queries.nvim",
     config = function(_, opts)

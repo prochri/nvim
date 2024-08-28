@@ -281,4 +281,8 @@ return {
     },
     opts = true,
   },
+  {
+    "j-hui/fidget.nvim",
+    opts = {},
+  },
 }

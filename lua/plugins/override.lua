@@ -99,7 +99,9 @@ return {
   },
   { import = "lazyvim.plugins.extras.coding.luasnip" },
   {
-    "hrsh7th/nvim-cmp",
+    "yioneko/nvim-cmp",
+    name = "nvim-cmp",
+    branch = "perf",
     dependencies = { "hrsh7th/cmp-emoji", { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } } },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
