@@ -37,6 +37,11 @@ end
 nnoremap("gf", "gF")
 nnoremap("gf", "<cmd>e <cfile><cr>")
 
+inoremap("<S-Down>", "<Nop>")
+inoremap("<S-Up>", "<Nop>")
+nnoremap("<S-Down>", "<Nop>")
+nnoremap("<S-Up>", "<Nop>")
+
 -- terminal mapping
 local terminal_escape = "<C-\\><C-n>"
 tnoremap("<C-Esc>", terminal_escape)
@@ -62,9 +67,9 @@ nnoremap("<C-=>", prochri.increase_fontsize)
 nnoremap("<C-->", prochri.decrease_fontsize)
 inoremap("<C-BS>", "<C-w>")
 cnoremap("<C-BS>", "<C-w>")
-inoremap("<D-v>", "<C-o>p")
-cnoremap("<D-v>", "<C-o>p")
-tnoremap("<D-v>", terminal_escape .. "p")
+inoremap("<D-v>", "<C-r>*")
+cnoremap("<D-v>", "<C-r>*")
+tnoremap("<D-v>", terminal_escape .. "pi")
 cnoremap("<C-k>", "<C-\\>ev:lua.prochri.delete_remaing_command_line()<cr>")
 
 map("n", "<C-LeftMouse>", "<LeftMouse>gd")

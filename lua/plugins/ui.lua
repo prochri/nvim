@@ -208,12 +208,19 @@ return {
   },
   {
     "NeogitOrg/neogit",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
     cmd = "Neogit",
+    ---@module "neogit"
+    ---@type NeogitConfig
     opts = {
       disable_commit_confirmation = true,
+      commit_editor = {
+        kind = "tab",
+        spell_check = false,
+      },
       integrations = {
         telescope = true,
+        diffview = true,
       },
     },
   },
@@ -273,7 +280,6 @@ return {
     end,
   },
 
-  "sindrets/diffview.nvim",
   {
     "fredeeb/tardis.nvim",
     depndencies = {
