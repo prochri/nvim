@@ -91,6 +91,7 @@ noremap({ "n", "i", "v", "x" }, "<D-3>", load_session_f("Simulation"))
 noremap({ "n", "i", "v", "x" }, "<D-4>", load_session_f("_SharedUtils"))
 noremap({ "n", "i", "v", "x" }, "<D-5>", load_session_f("Notes"))
 noremap({ "n", "i", "v", "x" }, "<D-6>", load_session_f("translation-tool"))
+noremap({ "n", "i", "v", "x" }, "<D-7>", load_session_f("App"))
 noremap({ "n", "i", "v", "x" }, "<D-0>", load_session_f("nvim-config"))
 
 local ok, noice_lsp = pcall(require, "noice.lsp")

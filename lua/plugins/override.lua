@@ -89,6 +89,12 @@ return {
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- keys[#keys + 1] = { "K", "<cmd>lua _G.prochri.smart_hover()<cr>" }
       keys[#keys + 1] = { "K", false }
+      keys[#keys + 1] = {
+        "<leader>cr",
+        function()
+          require("live-rename").rename({ insert = true })
+        end,
+      }
     end,
     -- opts = function(_spec, opts)
     --   opts.inlay_hints = {
