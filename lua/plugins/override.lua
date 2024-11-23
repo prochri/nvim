@@ -2,6 +2,9 @@
 vim.defer_fn(function()
   vim.cmd([[set cmdheight=1]])
 end, 1000)
+
+local experimental_cmp = false
+
 return {
   { import = "lazyvim.plugins.extras.ui.treesitter-context" },
   -- { "rcarriga/nvim-notify", enabled = false },
@@ -89,12 +92,6 @@ return {
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- keys[#keys + 1] = { "K", "<cmd>lua _G.prochri.smart_hover()<cr>" }
       keys[#keys + 1] = { "K", false }
-      keys[#keys + 1] = {
-        "<leader>cr",
-        function()
-          require("live-rename").rename({ insert = true })
-        end,
-      }
     end,
     -- opts = function(_spec, opts)
     --   opts.inlay_hints = {
@@ -105,9 +102,10 @@ return {
   },
   { import = "lazyvim.plugins.extras.coding.luasnip" },
   {
-    "yioneko/nvim-cmp",
+    "iguanacucumber/magazine.nvim",
     name = "nvim-cmp",
-    branch = "perf",
+    enabled = not experimental_cmp,
+    -- branch = "perf",
     dependencies = { "hrsh7th/cmp-emoji", { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } } },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -150,6 +148,13 @@ return {
           fallback()
         end
       end)
+      opts.mapping["<C-Enter>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert })
+        else
+          fallback()
+        end
+      end)
       opts.mapping["<C-l>"] = cmp.mapping(function(_)
         if luasnip.jumpable(1) then
           luasnip.jump(1)
@@ -166,11 +171,59 @@ return {
       require("cmp").setup.filetype({ "sql" }, {
         sources = {
           { name = "vim-dadbod-completion" },
+          { name = "cmp-dbee" },
           { name = "buffer" },
           { name = "git" },
         },
       })
     end,
+  },
+  {
+    "saghen/blink.cmp",
+    enabled = experimental_cmp,
+    lazy = false, -- lazy loading handled internally
+    -- optional: provides snippets for the snippet source
+    dependencies = "rafamadriz/friendly-snippets",
+
+    -- use a release tag to download pre-built binaries
+    version = "v0.*",
+    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      highlight = {
+        -- sets the fallback highlight groups to nvim-cmp's highlight groups
+        -- useful for when your theme doesn't support blink.cmp
+        -- will be removed in a future release, assuming themes add support
+        use_nvim_cmp_as_default = true,
+      },
+      -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+      -- adjusts spacing to ensure icons are aligned
+      nerd_font_variant = "normal",
+
+      -- experimental auto-brackets support
+      accept = { auto_brackets = { enabled = true } },
+
+      -- experimental signature help support
+      trigger = { signature_help = { enabled = true } },
+
+      windows = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay = 100,
+        },
+      },
+      keymap = {
+        select_next = { "<Down>", "<C-j>" },
+        select_prev = { "<Up>", "<C-k>" },
+        scroll_documentation_down = { "<C-d>" },
+        scroll_documentation_up = { "<C-u>" },
+      },
+    },
   },
   {
     "L3MON4D3/LuaSnip",

@@ -6,6 +6,7 @@ return {
     opts = {
       server = {
         load_vscode_settings = true,
+        capabilities = vim.lsp.protocol.make_client_capabilities(),
       },
     },
     --   function(spec, opts)

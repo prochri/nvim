@@ -208,7 +208,21 @@ return {
   },
   {
     "NeogitOrg/neogit",
-    dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "sindrets/diffview.nvim",
+        ---@module "diffview"
+        ---@type DiffviewConfig
+        opts = {
+          view = {
+            merge = {
+              layout = "diff3_mixed",
+            },
+          },
+        },
+      },
+    },
     cmd = "Neogit",
     ---@module "neogit"
     ---@type NeogitConfig
@@ -255,11 +269,13 @@ return {
       picker = "telescope",
     },
     keys = {
-      { "<leader>gi", "<cmd>Octo issue list<CR>", desc = "List Issues (Octo)" },
-      { "<leader>gI", "<cmd>Octo issue search<CR>", desc = "Search Issues (Octo)" },
+      { "<leader>gi", desc = "+issues (Octo)" },
+      { "<leader>gic", "<cmd>Octo issue create<CR>", desc = "Create Issue (Octo)" },
+      { "<leader>gii", "<cmd>Octo issue list<CR>", desc = "List Issues (Octo)" },
+      { "<leader>gis", "<cmd>Octo issue search<CR>", desc = "Search Issues (Octo)" },
       { "<leader>gp", desc = "+pull request (Octo)" },
       { "<leader>gpp", "<cmd>Octo pr list<CR>", desc = "List PRs (Octo)" },
-      { "<leader>gpP", "<cmd>Octo pr search<CR>", desc = "Search PRs (Octo)" },
+      { "<leader>gps", "<cmd>Octo pr search<CR>", desc = "Search PRs (Octo)" },
       { "<leader>gpc", "<cmd>Octo pr create<CR>", desc = "Create PR (Octo)" },
       { "<leader>gr", "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
       { "<leader>gS", "<cmd>Octo search<CR>", desc = "Search (Octo)" },
