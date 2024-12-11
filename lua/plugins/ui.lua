@@ -173,6 +173,7 @@ return {
       end)
     end,
   },
+  -- quickfix
   {
     "kevinhwang91/nvim-bqf",
     config = function()
@@ -206,6 +207,14 @@ return {
       })
     end,
   },
+  {
+    "stevearc/quicker.nvim",
+    -- event = "FileType qf",
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+  },
+
   {
     "NeogitOrg/neogit",
     dependencies = {
