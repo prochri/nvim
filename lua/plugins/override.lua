@@ -4,24 +4,21 @@ vim.defer_fn(function()
 end, 1000)
 
 local experimental_cmp = true
-vim.g.lazyvim_blink_main = false
 
 return {
   { import = "lazyvim.plugins.extras.ui.treesitter-context" },
   { import = "lazyvim.plugins.extras.coding.blink", enabled = experimental_cmp },
+  { "ibhagwan/fzf-lua", enabled = false },
   {
     "saghen/blink.cmp",
     enabled = experimental_cmp,
+    tag = "v0.8.2",
 
     opts = function(_, optsOld)
       ---@module 'blink.cmp'
       ---@type blink.cmp.Config
       local opts = optsOld
-      -- opts.trigger.signature_help.enabled = true
-      opts.trigger = opts.trigger or {}
-      opts.trigger.signature_help = {
-        enabled = true,
-      }
+      -- opts.signature.enabled = true
 
       opts.keymap = {
         -- or super tab maybe?
@@ -42,7 +39,22 @@ return {
       return opts
     end,
   },
-  -- { "rcarriga/nvim-notify", enabled = false },
+  { import = "lazyvim.plugins.extras.coding.luasnip" },
+  {
+    "folke/which-key.nvim",
+    opts = function(_, opts)
+      opts.preset = "classic"
+      return opts
+    end,
+  },
+  {
+    "folke/snacks.nvim",
+    opts = function(_, opts)
+      opts.scroll.enabled = false
+      opts.input.enabled = false
+      return opts
+    end,
+  }, -- { "rcarriga/nvim-notify", enabled = false },
   {
     "folke/noice.nvim",
     enabled = false,
@@ -57,9 +69,7 @@ return {
             kind = "error",
             find = "vtsls.*inlayHint",
           },
-          opts = {
-            skip = true,
-          },
+          opts = { skip = true },
         },
       }
       for _, route in ipairs(routes) do
@@ -67,8 +77,7 @@ return {
       end
       return opts
     end,
-  },
-  -- { "folke/trouble.nvim", enabled = false },
+  }, -- { "folke/trouble.nvim", enabled = false },
   {
     "echasnovski/mini.ai",
     opts = function(_, opts)
@@ -84,13 +93,7 @@ return {
       opts.search_method = "cover"
     end,
   },
-  {
-    "folke/tokyonight.nvim",
-    opts = {
-      style = "storm",
-      light_style = "day",
-    },
-  },
+  { "folke/tokyonight.nvim", opts = { style = "storm", light_style = "day" } },
   {
     "nvim-neo-tree/neo-tree.nvim",
     dependencies = {
@@ -105,7 +108,13 @@ return {
               -- filter using buffer options
               bo = {
                 -- if the file type is one of following, the window will be ignored
-                filetype = { "neo-tree", "neo-tree-popup", "notify", "OverseerList", "edgy" },
+                filetype = {
+                  "neo-tree",
+                  "neo-tree-popup",
+                  "notify",
+                  "OverseerList",
+                  "edgy",
+                },
                 -- if the buffer type is one of following, the window will be ignored
                 buftype = { "terminal", "quickfix" },
               },
@@ -117,8 +126,18 @@ return {
     keys = function(spec, old_keys)
       table.remove(old_keys)
       table.remove(old_keys)
-      table.insert(old_keys, { "<leader>ft", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true })
-      table.insert(old_keys, { "<leader>fT", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true })
+      table.insert(old_keys, {
+        "<leader>ft",
+        "<leader>fe",
+        desc = "Explorer NeoTree (root dir)",
+        remap = true,
+      })
+      table.insert(old_keys, {
+        "<leader>fT",
+        "<leader>fE",
+        desc = "Explorer NeoTree (cwd)",
+        remap = true,
+      })
     end,
   },
   {
@@ -135,26 +154,34 @@ return {
     --   return opts
     -- end,
   },
-  { import = "lazyvim.plugins.extras.coding.luasnip" },
   {
     "iguanacucumber/magazine.nvim",
     name = "nvim-cmp",
     enabled = not experimental_cmp,
     -- branch = "perf",
-    dependencies = { "hrsh7th/cmp-emoji", { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } } },
+    dependencies = {
+      "hrsh7th/cmp-emoji",
+      { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } },
+    },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      opts.experimental = {
-        ghost_text = false,
-      }
+      opts.experimental = { ghost_text = false }
       -- opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" }, { name = "git" } }))
       opts.sources = vim.list_extend(opts.sources, { { name = "emoji" }, { name = "git" } })
-      opts.mapping["<C-j>"] =
-        cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" })
-      opts.mapping["<C-k>"] =
-        cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" })
+      opts.mapping["<C-j>"] = cmp.mapping(
+        cmp.mapping.select_next_item({
+          behavior = cmp.SelectBehavior.Select,
+        }),
+        { "i" }
+      )
+      opts.mapping["<C-k>"] = cmp.mapping(
+        cmp.mapping.select_prev_item({
+          behavior = cmp.SelectBehavior.Select,
+        }),
+        { "i" }
+      )
       opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           local confirm_opts = {
@@ -200,9 +227,7 @@ return {
       opts.mapping["<CR>"] = nil
     end,
     init = function(_)
-      require("cmp_git").setup({
-        filetypes = { "NeogitCommitMessage" },
-      })
+      require("cmp_git").setup({ filetypes = { "NeogitCommitMessage" } })
       require("cmp").setup.filetype({ "sql" }, {
         sources = {
           { name = "vim-dadbod-completion" },

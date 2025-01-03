@@ -110,30 +110,6 @@ return {
   { "voldikss/vim-floaterm" },
   { "FabijanZulj/blame.nvim", opts = true },
   {
-    "lewis6991/hover.nvim",
-    config = function()
-      -- require("hover").setup({
-      --   init = function()
-      --     -- Require providers
-      --     require("hover.providers.lsp")
-      --     require("hover.providers.gh")
-      --     require("hover.providers.gh_user")
-      --     -- require('hover.providers.jira')
-      --     -- require("hover.providers.man")
-      --     -- require('hover.providers.dictionary')
-      --   end,
-      --   preview_opts = {
-      --     border = "none",
-      --   },
-      --   mouse_delay = 500,
-      -- })
-      -- vim.keymap.set("n", "<MouseMove>", function()
-      --   require("hover").hover_mouse()
-      -- end, { desc = "hover.nvim (mouse)" })
-      -- vim.o.mousemoveevent = true
-    end,
-  },
-  {
     "simnalamburt/vim-mundo",
     dependencies = {
       "kevinhwang91/nvim-fundo",
@@ -157,6 +133,15 @@ return {
           ["<TAB>"] = "TogglePreview",
           ["q"] = "<cmd>q<cr>",
           ["<ESC>"] = "<cmd>wincmd p<cr>",
+        },
+      },
+      component_aliases = {
+        default = {
+          { "display_duration", detail_level = 2 },
+          "on_output_summarize",
+          "on_exit_set_status",
+          "on_complete_notify",
+          { "on_complete_dispose", require_view = {} },
         },
       },
     },

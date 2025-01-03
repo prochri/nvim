@@ -178,7 +178,7 @@ function prochri.start_telescope_qf()
   require("telescope.builtin").quickfix()
 end
 
-function prochri.smart_hover()
+function prochri.smart_hover(opts)
   -- hover fold content
   local winid = require("ufo").peekFoldedLinesUnderCursor()
   if winid then
@@ -193,12 +193,13 @@ function prochri.smart_hover()
   -- check if rust-analyzer is active
   for _, client in ipairs(clients) do
     if client.name == "rust_analyzer" then
-      print("rust-analyzer hover")
       vim.cmd.RustLsp({ "hover", "actions" })
       return
     end
   end
-  local ok, _ = pcall(vim.lsp.buf.hover)
+  local ok, _ = pcall(function()
+    vim.lsp.buf.hover(opts)
+  end)
   if ok then
     return
   end

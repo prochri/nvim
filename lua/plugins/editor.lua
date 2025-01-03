@@ -2,7 +2,7 @@ return {
   { "tpope/vim-repeat", event = "VeryLazy" },
   {
     "ggandor/flit.nvim",
-    enabled = true,
+    enabled = false,
     keys = function()
       ---@type LazyKeysSpec[]
       local ret = {}
@@ -17,8 +17,8 @@ return {
     "ggandor/leap.nvim",
     enabled = true,
     keys = {
-      { "s", "<Plug>(leap-forward)", mode = { "n", "o" }, desc = "Leap Forward" },
-      { "S", "<Plug>(leap-backward)", mode = { "n", "o" }, desc = "Leap Backward" },
+      { "s", "<Plug>(leap-forward)", mode = { "n" }, desc = "Leap Forward" },
+      { "S", "<Plug>(leap-backward)", mode = { "n" }, desc = "Leap Backward" },
       { "z", "<Plug>(leap-forward)", mode = { "x", "o" }, desc = "Leap Forward" },
       { "Z", "<Plug>(leap-backward)", mode = { "x", "o" }, desc = "Leap Backward" },
       { "gs", "<Plug>(leap-from-window)", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
@@ -84,15 +84,15 @@ return {
     "mg979/vim-visual-multi",
     branch = "master",
   },
-  {
-    "LunarVim/bigfile.nvim",
-    opts = {
-      features = {
-        "treesitter",
-        "syntax",
-      },
-    },
-  },
+  -- {
+  --   "LunarVim/bigfile.nvim",
+  --   opts = {
+  --     features = {
+  --       "treesitter",
+  --       "syntax",
+  --     },
+  --   },
+  -- },
   {
     -- TODO: hide it if overlap
     "b0o/incline.nvim",
@@ -140,6 +140,67 @@ return {
     end,
   },
   {
+    "hesom/multihover.nvim",
+    config = function()
+      require("multihover").setup({
+        include_diagnostics = true,
+        show_titles = false,
+        popup_config = {
+          focusable = true,
+          focus_id = "textDocument/hover",
+        },
+      })
+      vim.lsp.buf.hover = require("multihover").hover
+    end,
+  },
+  {
+    "lewis6991/hover.nvim",
+    enabled = false,
+    config = function()
+      require("hover").setup({
+        init = function()
+          -- Require providers
+          require("hover.providers.lsp")
+          require("hover.providers.gh")
+          require("hover.providers.gh_user")
+          -- require('hover.providers.jira')
+          require("hover.providers.dap")
+          require("hover.providers.fold_preview")
+          require("hover.providers.diagnostic")
+          -- require('hover.providers.man')
+          -- require('hover.providers.dictionary')
+        end,
+        preview_opts = {
+          border = "none",
+        },
+        -- Whether the contents of a currently open hover window should be moved
+        -- to a :h preview-window when pressing the hover keymap.
+        preview_window = true,
+        title = true,
+        mouse_providers = {
+          "LSP",
+        },
+        mouse_delay = 1000,
+      })
+
+      -- Setup keymaps
+      vim.keymap.set("n", "K", function(opts)
+        prochri.smart_hover(opts)
+      end, { desc = "hover.nvim" })
+      vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
+      vim.keymap.set("n", "<C-p>", function()
+        require("hover").hover_switch("previous")
+      end, { desc = "hover.nvim (previous source)" })
+      vim.keymap.set("n", "<C-n>", function()
+        require("hover").hover_switch("next")
+      end, { desc = "hover.nvim (next source)" })
+
+      -- Mouse support
+      vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
+      vim.o.mousemoveevent = true
+    end,
+  },
+  {
     "lewis6991/gitsigns.nvim",
     opts = function(spec, opts)
       opts.current_line_blame = true
@@ -169,7 +230,6 @@ return {
   },
   {
     "chrisgrieser/nvim-early-retirement",
-    enabled = false,
     config = true,
     event = "VeryLazy",
   },
