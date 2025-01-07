@@ -12,7 +12,6 @@ return {
   {
     "saghen/blink.cmp",
     enabled = experimental_cmp,
-    tag = "v0.8.2",
 
     opts = function(_, optsOld)
       ---@module 'blink.cmp'
