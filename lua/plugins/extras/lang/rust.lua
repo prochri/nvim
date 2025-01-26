@@ -3,12 +3,13 @@ return {
   { import = "lazyvim.plugins.extras.lang.rust" },
   {
     "mrcjkb/rustaceanvim",
-    opts = {
-      server = {
-        load_vscode_settings = true,
-        capabilities = vim.lsp.protocol.make_client_capabilities(),
-      },
-    },
+    opts = function(spec, opts)
+      p(opts)
+      opts.server.load_vscode_settings = true
+      opts.server.capabilities = vim.lsp.protocol.make_client_capabilities()
+      opts.server.default_settings["rust-analyzer"].procMacro.ignored = {}
+      return opts
+    end,
     --   function(spec, opts)
     --   opts.server.load_vscode_settings = true
     --   return opts

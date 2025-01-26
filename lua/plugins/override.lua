@@ -40,6 +40,15 @@ return {
   },
   { import = "lazyvim.plugins.extras.coding.luasnip" },
   {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      opts.incremental_selection.keymaps.init_selection = "<CR>"
+      opts.incremental_selection.keymaps.node_incremental = "<CR>"
+      opts.incremental_selection.keymaps.scope_incremental = "<C-space>"
+      return opts
+    end,
+  },
+  {
     "folke/which-key.nvim",
     opts = function(_, opts)
       opts.preset = "classic"
