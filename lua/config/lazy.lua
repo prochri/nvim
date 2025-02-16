@@ -8,6 +8,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 vim.g.lazyvim_picker = "telescope"
 vim.g.lazyvim_prettier_needs_config = true
+vim.g.lazyvim_check_order = false
 
 require("lazy").setup({
   spec = {
