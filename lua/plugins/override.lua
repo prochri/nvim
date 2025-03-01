@@ -35,6 +35,8 @@ return {
         -- ["<C-n>"] = {"select_next", "fallback"},
         -- ["<C-p>"] = {"select_prev", "fallback"},
       }
+      -- TODO: remove this again if ticket is closed
+      opts.completion.accept.dot_repeat = false
       return opts
     end,
   },
