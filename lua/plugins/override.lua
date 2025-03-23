@@ -35,6 +35,8 @@ return {
         -- ["<C-n>"] = {"select_next", "fallback"},
         -- ["<C-p>"] = {"select_prev", "fallback"},
       }
+      -- TODO: remove this again if ticket is closed - https://github.com/Saghen/blink.cmp/issues/1247
+      opts.completion.accept.dot_repeat = false
       return opts
     end,
   },
