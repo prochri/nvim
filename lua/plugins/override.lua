@@ -36,7 +36,34 @@ return {
         -- ["<C-p>"] = {"select_prev", "fallback"},
       }
       -- TODO: remove this again if ticket is closed - https://github.com/Saghen/blink.cmp/issues/1247
-      opts.completion.accept.dot_repeat = false
+      -- opts.completion.accept.dot_repeat = false
+      opts.keymap["<Tab>"] = {
+        function(cmp)
+          prochri.without_neovide_animation()
+          if cmp.snippet_active() then
+            return cmp.accept()
+          else
+            return cmp.select_and_accept()
+          end
+        end,
+        "snippet_forward",
+        "fallback",
+      }
+      opts.keymap["<Down>"] = {
+        function(cmp)
+          prochri.without_neovide_animation()
+          cmp.scroll_documentation_down()
+        end,
+        "fallback",
+      }
+      opts.keymap["<Up>"] = {
+        function(cmp)
+          prochri.without_neovide_animation()
+          cmp.scroll_documentation_down()
+        end,
+        "fallback",
+      }
+
       return opts
     end,
   },
