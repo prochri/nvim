@@ -260,7 +260,7 @@ return {
       { "<leader>gY", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
     },
   },
-  { "anuvyklack/hydra.nvim" },
+  -- { "anuvyklack/hydra.nvim" },
   { "tpope/vim-rsi" },
   {
     "gw31415/deepl-commands.nvim",

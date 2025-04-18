@@ -649,13 +649,20 @@ function reload_module(module)
   return require(module)
 end
 
+local origin_len = vim.g.neovide_cursor_animation_length
+local origin_trail = vim.g.neovide_cursor_trail_size
+local animation_count = 0
+
 function prochri.without_neovide_animation()
-  local origin_len = vim.g.neovide_cursor_animation_length
-  local origin_trail = vim.g.neovide_cursor_trail_size
   vim.g.neovide_cursor_animation_length = 0
   vim.g.neovide_cursor_trail_size = 0
+  animation_count = animation_count + 1
   vim.defer_fn(function()
+    animation_count = animation_count - 1
+    if animation_count ~= 0 then
+      return
+    end
     vim.g.neovide_cursor_animation_length = origin_len
     vim.g.neovide_cursor_trail_size = origin_trail
-  end, 100)
+  end, 150)
 end

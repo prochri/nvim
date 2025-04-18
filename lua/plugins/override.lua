@@ -53,13 +53,14 @@ return {
         function(cmp)
           prochri.without_neovide_animation()
           cmp.scroll_documentation_down()
+          return cmp.select_next()
         end,
         "fallback",
       }
       opts.keymap["<Up>"] = {
         function(cmp)
           prochri.without_neovide_animation()
-          cmp.scroll_documentation_down()
+          return cmp.select_prev()
         end,
         "fallback",
       }

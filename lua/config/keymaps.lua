@@ -3,7 +3,7 @@
 -- Add any additional keymaps here
 
 require("config.which-key")
-require("prochri.hydra")
+-- require("prochri.hydra")
 require("prochri.fun")
 
 local map = vim.keymap.set

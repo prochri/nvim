@@ -148,9 +148,9 @@ return {
     config = function(_, opts)
       local overseer = require("overseer")
       overseer.setup(opts)
-      overseer.add_template_hook(nil, function(task_defn, util)
-        p(task_defn)
-      end)
+      -- overseer.add_template_hook(nil, function(task_defn, util)
+      --   p(task_defn)
+      -- end)
       overseer.add_template_hook({ dir = os.getenv("HOME") .. "/Monorepo/Portal" }, function(task_defn, util)
         if task_defn.args[1] == "run" and task_defn.args[2] == "generate" then
           util.add_component(task_defn, { "prochri.on_complete_vim_cmd", vim_cmd = "LspNameRestart graphql" })

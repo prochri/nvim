@@ -30,11 +30,21 @@ return {
             local util = require("lspconfig.util")
             return util.root_pattern("buildServer.json")(filename)
               or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
-              or util.find_git_ancestor(filename)
               or util.root_pattern("Package.swift")(filename)
           end,
         },
       },
     },
+  },
+  {
+    "wojciech-kulik/xcodebuild.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("xcodebuild").setup({
+        -- put some options here or leave it empty to use default settings
+      })
+    end,
   },
 }
