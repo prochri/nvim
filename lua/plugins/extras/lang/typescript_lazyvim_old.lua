@@ -45,6 +45,7 @@ return {
         },
         ---@type lspconfig.options.tsserver
         tsserver = {
+          enabled = false,
           keys = {
             {
               "<leader>co",

@@ -35,6 +35,9 @@ return {
         -- ["<C-n>"] = {"select_next", "fallback"},
         -- ["<C-p>"] = {"select_prev", "fallback"},
       }
+      -- TODO: check if this is necessary
+      opts.completion.accept.auto_brackets.enabled = false
+      opts.completion.ghost_text.enabled = false
       -- TODO: remove this again if ticket is closed - https://github.com/Saghen/blink.cmp/issues/1247
       -- opts.completion.accept.dot_repeat = false
       opts.keymap["<Tab>"] = {

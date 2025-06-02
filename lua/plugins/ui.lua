@@ -123,6 +123,7 @@ return {
   {
     "stevearc/overseer.nvim",
     event = "VeryLazy",
+    --- @type overseer.Config
     opts = {
       task_list = {
         bindings = {
@@ -148,13 +149,48 @@ return {
     config = function(_, opts)
       local overseer = require("overseer")
       overseer.setup(opts)
-      -- overseer.add_template_hook(nil, function(task_defn, util)
-      --   p(task_defn)
-      -- end)
       overseer.add_template_hook({ dir = os.getenv("HOME") .. "/Monorepo/Portal" }, function(task_defn, util)
         if task_defn.args[1] == "run" and task_defn.args[2] == "generate" then
           util.add_component(task_defn, { "prochri.on_complete_vim_cmd", vim_cmd = "LspNameRestart graphql" })
         end
+      end)
+      local ts_error_format = "%f:%l:%c - %trror TS%n: %m"
+      -- quickfix for tscheck
+      overseer.add_template_hook({ module = "npm", name = ".*tsc.*" }, function(task_defn, util)
+        util.add_component(task_defn, {
+          "on_output_quickfix",
+          open_on_exit = "failure",
+          close = true,
+          items_only = true,
+          errorformat = ts_error_format,
+        })
+      end)
+      overseer.add_template_hook({ module = "npm", name = ".*tsgocheck.*" }, function(task_defn, util)
+        util.add_component(task_defn, {
+          "on_output_quickfix",
+          open_on_exit = "failure",
+          close = true,
+          items_only = true,
+          errorformat = ts_error_format,
+        })
+      end)
+      -- quickfix for eslint
+      overseer.add_template_hook({ module = "npm", name = ".*eslint.*" }, function(task_defn, util)
+        util.add_component(task_defn, {
+          "on_output_quickfix",
+          open_on_exit = "failure",
+          items_only = true,
+          errorformat = "%+P%f,%*[\\\\ ]%l:%c%*[\\\\ ]%trror%*[\\\\ ]%m,%-Q",
+        })
+      end)
+      -- quickfix for rust build
+      overseer.add_template_hook({ module = "npm", name = ".*build.*" }, function(task_defn, util)
+        util.add_component(task_defn, {
+          "on_output_quickfix",
+          open_on_exit = "failure",
+          items_only = true,
+          errorformat = "%Eerror[%t%n]: %m,%Z%*[\\\\ ]--> Simulation/%f:%l:%c",
+        })
       end)
     end,
   },
@@ -226,6 +262,7 @@ return {
         kind = "tab",
         spell_check = false,
       },
+      prompt_force_push = false,
       integrations = {
         telescope = true,
         diffview = true,

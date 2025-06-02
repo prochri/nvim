@@ -28,6 +28,10 @@ local function tnoremap(lhs, rhs, opts)
   noremap("t", lhs, rhs, opts)
 end
 
+-- disable some keymaps
+vim.keymap.del("i", "<M-k>")
+vim.keymap.del("i", "<M-j>")
+
 nnoremap("zf", prochri.fold_functions, { desc = "fold toplevel functions" })
 for i = 0, 9 do
   nnoremap("z" .. i, "<cmd>lua prochri.fold_on_lvl_only(" .. i .. ")<cr>", { desc = "fold on lvl " .. i })
@@ -36,6 +40,7 @@ end
 ---@see https://www.reddit.com/r/neovim/comments/10b7e5x/comment/j49q3x2/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 nnoremap("gf", "gF")
 nnoremap("gf", "<cmd>e <cfile><cr>")
+nnoremap("gX", prochri.open_first_hover_link)
 
 inoremap("<S-Down>", "<Nop>")
 inoremap("<S-Up>", "<Nop>")
@@ -52,6 +57,11 @@ tnoremap("<M-Space>", terminal_escape .. "<Space>")
 -- tnoremap("<C-j>", terminal_escape .. "<C-w>j")
 -- tnoremap("<C-k>", terminal_escape .. "<C-w>k")
 -- tnoremap("<C-l>", terminal_escape .. "<C-w>l")
+--
+inoremap("<C-h>", "<C-o><C-w>h")
+inoremap("<C-j>", "<C-o><C-w>j")
+inoremap("<C-k>", "<C-o><C-w>k")
+inoremap("<C-l>", "<C-o><C-w>l")
 tnoremap("<S-BS>", "<BS>")
 vim.cmd([[nnoremap <silent><c-/> <Cmd>exe v:count1 . "ToggleTerm"<CR>]])
 vim.cmd([[inoremap <silent><c-/> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>]])

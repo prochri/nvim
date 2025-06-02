@@ -1,4 +1,6 @@
 local useVtsls = false
+local enableTsgo = false
+
 return {
   { import = "lazyvim.plugins.extras.lang.typescript", enabled = useVtsls },
   {
@@ -20,6 +22,29 @@ return {
       settings.typescript.tsserver.watchOptions = settings.typescript.tsserver.watchOptions or {}
       settings.typescript.tsserver.watchOptions.watchFile = "useFsEvents"
       settings.typescript.tsserver.watchOptions.watchDirectory = "useFsEvents"
+
+      return opts
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
+      if not enableTsgo then
+        return opts
+      end
+      vim.lsp.config("tsgo_ls", {
+        cmd = { "tsgo", "lsp", "-stdio" },
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+        },
+        root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+      })
+      vim.lsp.enable("tsgo_ls")
 
       return opts
     end,

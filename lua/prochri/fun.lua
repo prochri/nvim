@@ -666,3 +666,100 @@ function prochri.without_neovide_animation()
     vim.g.neovide_cursor_trail_size = origin_trail
   end, 150)
 end
+
+---@return nio.lsp.types.Position
+local function get_cursor_position()
+  -- Get current window cursor (row, col) - Neovim uses 1-indexed rows
+  local win_cursor = vim.api.nvim_win_get_cursor(0)
+  -- LSP uses 0-indexed positions, so we need to adjust the row
+  return {
+    line = win_cursor[1] - 1, -- Convert row to 0-indexed
+    character = win_cursor[2], -- Column is already 0-indexed
+  }
+end
+
+local array = require("prochri.array")
+function prochri.open_first_hover_link()
+  local nio = require("nio")
+  local bufnr = vim.api.nvim_get_current_buf()
+  local position = get_cursor_position()
+  nio.run(function()
+    local clients = nio.lsp.get_clients({ method = "texDocument/hover" })
+
+    p(#clients)
+    ---@type (nio.lsp.types.Hover|nil)[]
+    local hoverResults = nio.gather(array.map(clients, function(client)
+      return function()
+        local err, result = client.request.textDocument_hover({
+          textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+          position = position,
+        }, bufnr)
+        return result
+      end
+    end))
+
+    array.forEach(hoverResults, function(result)
+      if not result then
+        return
+      end
+      local url_pattern = "https?://[%w%-%._~:/%?#%[%]@!%$&'%(%)%*%+,;=%%]+"
+      local url = string.match(result.contents.value, url_pattern)
+      p(url)
+      if url then
+        vim.ui.open(url)
+      end
+    end)
+  end)
+end
+
+local examples = {
+  eslint_output_example = {
+    "/Users/christophprobst/Monorepo/_SharedUtils/src/building/buildingDefaults.ts",
+    "  69:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any",
+    "  70:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any",
+    "✖ 2 problems (2 errors, 0 warnings)",
+  },
+  rust_output_example = {
+    "error[E0004]: non-exhaustive patterns: `&ItBuildingMaterialType::Window_LowEmissionDoubleGlazedMetal Frame` not covered",
+    "   --> Simulation/src/comp/simulation/components/building_demand/uvalues/italy.rs:796:15",
+    "    |",
+    "796 |         match self {",
+    "    |               ^^^^ pattern `&ItBuildingMaterialType::Window_LowEmissionDoubleGlazedMetalFrame`",
+    " not covered",
+    "    |",
+    "note: `ItBuildingMaterialType` defined here",
+    "   --> Simulation/src/comp/simulation/components/building_demand/uvalues/italy.rs:657:6",
+    "    |",
+    "657 | enum ItBuildingMaterialType {",
+    "    |      ^^^^^^^^^^^^^^^^^^^^^^",
+    "...",
+    "733 |     Window_LowEmissionDoubleGlazedMetalFrame, // Vetro-camera basso-emissivo con intercaped...",
+    "    |     ---------------------------------------- not covered",
+    "    = note: the matched value is of type `&ItBuildingMaterialType`",
+    "help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern",
+    " or an explicit pattern as shown",
+    "    |",
+    "914 ~             Self::Window_LowEmissionDoubleGlazedWoodFrame => 2.2,",
+    "915 ~             &ItBuildingMaterialType::Window_LowEmissionDoubleGlazedMetalFrame => todo!(),",
+    "    |",
+  },
+}
+
+local errorformats = {
+  eslint_errorformat = "%+P%f,%*[\\\\ ]%l:%c%*[\\\\ ]%trror%*[\\\\ ]%m,%-Q",
+  rust_errorformat = "%Eerror[%t%n]: %m,%Z%*[\\\\ ]--> %f:%l:%c",
+}
+
+local test_error_format = function()
+  p(vim.tbl_filter(
+    function(item)
+      return item.valid == 1
+    end,
+    vim.fn.getqflist({
+      lines = rust_output_example,
+      -- efm = "%+P%f,%*%l:%c%*[\\ ]%trror%*[\\ ]%m,%-Q",
+      efm = rust_errorformat,
+    }).items
+  ))
+end
+-- test_error_format()
