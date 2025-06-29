@@ -107,7 +107,13 @@ return {
       },
     },
   },
-  { "voldikss/vim-floaterm" },
+  -- { "voldikss/vim-floaterm" },
+  {
+    "nvzone/floaterm",
+    dependencies = "nvzone/volt",
+    opts = {},
+    cmd = "FloatermToggle",
+  },
   { "FabijanZulj/blame.nvim", opts = true },
   {
     "simnalamburt/vim-mundo",

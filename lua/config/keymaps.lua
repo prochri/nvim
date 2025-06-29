@@ -63,8 +63,9 @@ inoremap("<C-j>", "<C-o><C-w>j")
 inoremap("<C-k>", "<C-o><C-w>k")
 inoremap("<C-l>", "<C-o><C-w>l")
 tnoremap("<S-BS>", "<BS>")
-vim.cmd([[nnoremap <silent><c-/> <Cmd>exe v:count1 . "ToggleTerm"<CR>]])
-vim.cmd([[inoremap <silent><c-/> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>]])
+vim.cmd([[nnoremap <silent><c-/> <Cmd>FloatermToggle<CR>]])
+vim.cmd([[inoremap <silent><c-/> <Esc><Cmd>FloatermToggle<CR>]])
+vim.cmd([[tnoremap <silent><c-/> <Esc><Cmd>FloatermToggle<CR>]])
 
 require("prochri.fun")
 
