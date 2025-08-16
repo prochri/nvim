@@ -33,7 +33,7 @@ return {
         return opts
       end
       vim.lsp.config("tsgo_ls", {
-        cmd = { "tsgo", "lsp", "-stdio" },
+        cmd = { "tsgo", "--lsp", "--stdio" },
         filetypes = {
           "javascript",
           "javascriptreact",
@@ -45,6 +45,13 @@ return {
         root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
       })
       vim.lsp.enable("tsgo_ls")
+
+      opts.servers.vtsls = {
+        enabled = false,
+      }
+      opts.servers.ts_ls = {
+        enabled = false,
+      }
 
       return opts
     end,
@@ -58,7 +65,7 @@ return {
   --   end,
   -- },
   -- using the old lazyvim typescript
-  { import = "plugins.extras.lang.typescript_lazyvim_old", enabled = not useVtsls },
+  { import = "plugins.extras.lang.typescript_lazyvim_old", enabled = not useVtsls and not enableTsgo },
   {
     "marilari88/twoslash-queries.nvim",
     config = function(_, opts)

@@ -91,7 +91,16 @@ return {
     "folke/snacks.nvim",
     opts = function(_, opts)
       opts.scroll.enabled = false
-      opts.input.enabled = false
+      opts.input.enabled = true
+      opts.picker = opts.picker or {}
+      opts.picker.win.input.keys["<Esc>"] = { "close", mode = { "n", "i" } }
+      -- ui select has no recency support in
+      opts.picker.ui_select = false
+      -- opts.picker.matcher.frecency = true
+      opts.picker.layout = { preset = "ivy", layout = { position = "bottom" } }
+      opts.words = {
+        debounce = 300,
+      }
       return opts
     end,
   }, -- { "rcarriga/nvim-notify", enabled = false },

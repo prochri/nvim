@@ -14,7 +14,7 @@ end
 
 vim.fn.setenv("VISUAL", "nvr -l")
 vim.fn.setenv("EDITOR", "nvr -l")
-vim.fn.setenv("NODE_OPTIONS", "--max_old_space_size=8192")
+vim.fn.setenv("NODE_OPTIONS", "--max_old_space_size=24000")
 vim.fn.setenv("TSS_LOG", "-level trace -file /Users/christophprobst/tmp/tss/tss.log")
 -- load secret environment variables, but do not fail.
 pcall(dofile, os.getenv("HOME") .. "/.config/nvim/secrets.lua")
