@@ -251,10 +251,9 @@ end
 
 local async = require("async")
 local await = require("async").wait
-local ufo = require("ufo")
 function prochri.foldfun()
   async(function()
-    p(await(ufo.getFolds(vim.api.nvim_get_current_buf(), "lsp")))
+    p(await(require("ufo").getFolds(vim.api.nvim_get_current_buf(), "lsp")))
   end)
 end
 

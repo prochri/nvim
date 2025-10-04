@@ -162,18 +162,22 @@ return {
     end,
   },
   {
+    "chrisgrieser/nvim-origami",
+    enabled = true,
+    event = "BufReadPost", -- later or on keypress would prevent saving folds
+    opts = {
+      pauseFoldsOnSearch = true,
+      foldKeymaps = {
+        setup = true,
+        hOnlyOpensOnFirstColumn = true,
+      },
+    },
+  },
+  {
     "kevinhwang91/nvim-ufo",
+    enabled = false,
     dependencies = {
       "kevinhwang91/promise-async",
-      {
-        "chrisgrieser/nvim-origami",
-        event = "BufReadPost", -- later or on keypress would prevent saving folds
-        opts = {
-          pauseFoldsOnSearch = true,
-          keepFoldsAcrossSessions = false,
-          setupFoldKeymaps = false,
-        },
-      },
     },
     config = function()
       vim.keymap.set("n", "zR", require("ufo").openAllFolds)

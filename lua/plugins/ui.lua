@@ -119,6 +119,7 @@ return {
     "simnalamburt/vim-mundo",
     dependencies = {
       "kevinhwang91/nvim-fundo",
+      dependencies = "kevinhwang91/promise-async",
       opts = true,
       build = function()
         require("fundo").install()
