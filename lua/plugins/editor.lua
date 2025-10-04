@@ -104,12 +104,29 @@ return {
     },
   },
   {
+    "shushtain/nvim-treesitter-incremental-selection",
+    config = function()
+      local tsis = require("nvim-treesitter-incremental-selection")
+
+      ---@type TSIS.Config
+      tsis.setup({
+        ignore_injections = false,
+        loop_siblings = false,
+        fallback = false,
+        quiet = false,
+      })
+      vim.keymap.set("n", "<CR>", tsis.init_selection)
+      vim.keymap.set("v", "<CR>", tsis.increment_node)
+      vim.keymap.set("v", "<BS>", tsis.decrement_node)
+    end,
+  },
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {},
     -- disable mini.pairs as this is a replacement
     dependencies = {
-      "echasnovski/mini.pairs",
+      "nvim-mini/mini.pairs",
       enabled = false,
     },
   },

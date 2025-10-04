@@ -74,9 +74,9 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      opts.incremental_selection.keymaps.init_selection = "<CR>"
-      opts.incremental_selection.keymaps.node_incremental = "<CR>"
-      opts.incremental_selection.keymaps.scope_incremental = "<C-space>"
+      -- opts.incremental_selection.keymaps.init_selection = "<CR>"
+      -- opts.incremental_selection.keymaps.node_incremental = "<CR>"
+      -- opts.incremental_selection.keymaps.scope_incremental = "<C-space>"
       return opts
     end,
   },
@@ -128,7 +128,7 @@ return {
     end,
   }, -- { "folke/trouble.nvim", enabled = false },
   {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     opts = function(_, opts)
       local ai = require("mini.ai")
       opts.custom_textobjects.f = opts.custom_textobjects.u
