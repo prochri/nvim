@@ -91,7 +91,7 @@ return {
     "folke/snacks.nvim",
     opts = function(_, opts)
       opts.scroll.enabled = false
-      opts.input.enabled = true
+      opts.input.enabled = false
       opts.picker = opts.picker or {}
       opts.picker.win.input.keys["<Esc>"] = { "close", mode = { "n", "i" } }
       -- ui select has no recency support in

@@ -4,10 +4,9 @@ return {
   {
     "mrcjkb/rustaceanvim",
     opts = function(spec, opts)
-      p(opts)
       opts.server.load_vscode_settings = true
       opts.server.capabilities = vim.lsp.protocol.make_client_capabilities()
-      opts.server.default_settings["rust-analyzer"].procMacro.ignored = {}
+      -- opts.server.default_settings["rust-analyzer"].procMacro.ignored = {}
       return opts
     end,
     --   function(spec, opts)

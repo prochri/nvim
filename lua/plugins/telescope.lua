@@ -238,7 +238,7 @@ return {
   {
     dir = "~/git/telescope-all-recent.nvim",
     event = "VeryLazy",
-    dependencies = { "nvim-telescope/telescope.nvim", "kkharji/sqlite.lua" },
+    dependencies = { "nvim-telescope/telescope.nvim", "kkharji/sqlite.lua", "stevearc/dressing.nvim" },
     opts = {
       -- debug = true,
       pickers = {

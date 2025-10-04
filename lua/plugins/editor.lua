@@ -1,6 +1,6 @@
 return {
   { "tpope/vim-repeat", event = "VeryLazy" },
-
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     "chrishrb/gx.nvim",
     keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
